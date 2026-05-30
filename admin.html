@@ -435,7 +435,10 @@
                                 </div>
                                 <div>
                                     <label class="block text-sm font-medium mb-1">Info Orang Tua</label>
-                                    <textarea id="config-groomParents" class="w-full rounded-lg border-gray-300 text-sm h-20"></textarea>
+                                    <div class="flex gap-2 items-start">
+                                        <textarea id="config-groomParents" class="w-full rounded-lg border-gray-300 text-sm h-20"></textarea>
+                                        <input type="color" id="config-colorGroomParents" class="h-8 w-10 rounded cursor-pointer shrink-0 mt-1" value="#43493e">
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -455,7 +458,10 @@
                                 </div>
                                 <div>
                                     <label class="block text-sm font-medium mb-1">Info Orang Tua</label>
-                                    <textarea id="config-brideParents" class="w-full rounded-lg border-gray-300 text-sm h-20"></textarea>
+                                    <div class="flex gap-2 items-start">
+                                        <textarea id="config-brideParents" class="w-full rounded-lg border-gray-300 text-sm h-20"></textarea>
+                                        <input type="color" id="config-colorBrideParents" class="h-8 w-10 rounded cursor-pointer shrink-0 mt-1" value="#43493e">
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -1084,10 +1090,10 @@ Wassalamu'alaikum Wr. Wb.
 
             groomName: "Andy",
             groomFullName: "Andy", colorCoupleGroomName: "#4a3b52",
-            groomParents: "Putra dari Bapak Fulan\n& Ibu Fulanah",
+            groomParents: "Putra dari Bapak Fulan\n& Ibu Fulanah", colorGroomParents: "#43493e",
             brideName: "Thea",
             brideFullName: "Thea", colorCoupleBrideName: "#4a3b52",
-            brideParents: "Putri dari Bapak Fulan\n& Ibu Fulanah",
+            brideParents: "Putri dari Bapak Fulan\n& Ibu Fulanah", colorBrideParents: "#43493e",
             musicUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
             
             groomImage: "https://lh3.googleusercontent.com/aida-public/AB6AXuB2IcxhRRhu-9RgYB48oumGBk3VAKeQeCW1KnWDMw9jXvI5esvHrxg6Z_a2jpmXZtTo8ulsArM92zJtjA1rpfe8CShsfUQU0TxfEfnuq-fSBX3wXo-3Cz6-VsaOkxsFf4iso6CDKM18lWsSDG1d193QvXmL-1kKTxSaXxrm0LOCZ6G-ZdzEIXyGKA3j1VqSdc2JPfFv4JQ7EU6QZm-5VfaiEaxVMo66B5QwTlcFnt2w7JbvWHKc5JXqnB_9PCo2vv4MBLJJ5QDnxEA",
@@ -1294,8 +1300,23 @@ Wassalamu'alaikum Wr. Wb.
 
         let activeTypoKey = null;
 
-        function loadData() {
-            const saved = JSON.parse(localStorage.getItem('wedding_config')) || {};
+        async function loadData() {
+            let saved = {};
+            if (supabaseClient) {
+                try {
+                    const { data, error } = await supabaseClient.from('wedding_config').select('config_data').eq('id', 1).single();
+                    if (data && data.config_data) {
+                        saved = data.config_data;
+                        localStorage.setItem('wedding_config', JSON.stringify(saved)); // sync to local
+                    } else if (error && error.code !== 'PGRST116') {
+                        console.error('Error fetching config from Supabase:', error);
+                    }
+                } catch(e) { console.error('Supabase load error:', e); }
+            }
+            if (Object.keys(saved).length === 0) {
+                saved = JSON.parse(localStorage.getItem('wedding_config')) || {};
+            }
+            
             const config = { ...DEFAULT_CONFIG, ...saved };
             
             // Inject typography gear icons
@@ -1357,7 +1378,7 @@ Wassalamu'alaikum Wr. Wb.
             renderGuests();
         }
 
-        function saveAll() {
+        async function saveAll() {
             const config = JSON.parse(localStorage.getItem('wedding_config')) || {};
             Object.keys(DEFAULT_CONFIG).forEach(key => {
                 const el = document.getElementById(`config-${key}`);
@@ -1367,14 +1388,26 @@ Wassalamu'alaikum Wr. Wb.
             });
             
             try {
+                // Save to Supabase first
+                if (supabaseClient) {
+                    showToast("Menyimpan ke Cloud...", "☁️");
+                    const { error } = await supabaseClient.from('wedding_config').upsert({ id: 1, config_data: config });
+                    if (error) throw error;
+                }
+                
+                // Fallback / Sync to LocalStorage
                 localStorage.setItem('wedding_config', JSON.stringify(config));
-                localStorage.setItem('wa_template', document.getElementById('wa-template').value);
+                const waTemplateEl = document.getElementById('wa-template');
+                if (waTemplateEl) {
+                    localStorage.setItem('wa_template', waTemplateEl.value);
+                }
                 showToast("Semua konfigurasi berhasil disimpan!");
             } catch (e) {
                 if (e.name === 'QuotaExceededError') {
                     alert("GAGAL MENYIMPAN! Kapasitas penyimpanan penuh (Browser Quota).\n\nHapus file MP3 yang baru saja diunggah, atau hapus beberapa file gambar. Sebaiknya gunakan URL link untuk Lagu.");
                 } else {
-                    alert("Terjadi kesalahan saat menyimpan.");
+                    console.error(e);
+                    alert("Terjadi kesalahan saat menyimpan ke database.");
                 }
             }
         }

@@ -18,6 +18,10 @@
     <!-- Material Icons -->
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
     
+    <!-- Supabase SDK -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="env.js"></script>
+
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     
@@ -487,6 +491,11 @@
 
     <!-- Scripts -->
     <script>
+        // --- SUPABASE CLIENT ---
+        const supabaseUrl = (typeof ENV !== 'undefined' && ENV.SUPABASE_URL) ? ENV.SUPABASE_URL : '';
+        const supabaseKey = (typeof ENV !== 'undefined' && ENV.SUPABASE_KEY) ? ENV.SUPABASE_KEY : '';
+        const supabaseClient = (supabaseUrl && supabaseKey) ? window.supabase.createClient(supabaseUrl, supabaseKey) : null;
+
         // Section Definition for Backgrounds
         const bgSections = ['cover', 'hero', 'ayat', 'couple', 'event', 'gallery', 'rsvp', 'gift', 'closing'];
 
@@ -494,11 +503,11 @@
         const DEFAULT_CONFIG = {
             pageTitle: "Wedding Invitation",
             groomName: "Andy",
-            groomFullName: "Andy",
-            groomParents: "Putra dari Bapak Fulan\n& Ibu Fulanah",
+            groomFullName: "Andy", colorCoupleGroomName: "#4a3b52",
+            groomParents: "Putra dari Bapak Fulan\n& Ibu Fulanah", colorGroomParents: "#43493e",
             brideName: "Thea",
-            brideFullName: "Thea",
-            brideParents: "Putri dari Bapak Fulan\n& Ibu Fulanah",
+            brideFullName: "Thea", colorCoupleBrideName: "#4a3b52",
+            brideParents: "Putri dari Bapak Fulan\n& Ibu Fulanah", colorBrideParents: "#43493e",
             musicUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
             
             groomImage: "https://lh3.googleusercontent.com/aida-public/AB6AXuB2IcxhRRhu-9RgYB48oumGBk3VAKeQeCW1KnWDMw9jXvI5esvHrxg6Z_a2jpmXZtTo8ulsArM92zJtjA1rpfe8CShsfUQU0TxfEfnuq-fSBX3wXo-3Cz6-VsaOkxsFf4iso6CDKM18lWsSDG1d193QvXmL-1kKTxSaXxrm0LOCZ6G-ZdzEIXyGKA3j1VqSdc2JPfFv4JQ7EU6QZm-5VfaiEaxVMo66B5QwTlcFnt2w7JbvWHKc5JXqnB_9PCo2vv4MBLJJ5QDnxEA",
@@ -601,8 +610,23 @@
         }
 
         // Initialize Content
-        function initApp() {
-            const saved = JSON.parse(localStorage.getItem('wedding_config')) || {};
+        async function initApp() {
+            let saved = {};
+            // Try fetching from Supabase first
+            if (supabaseClient) {
+                try {
+                    const { data, error } = await supabaseClient.from('wedding_config').select('config_data').eq('id', 1).single();
+                    if (data && data.config_data) {
+                        saved = data.config_data;
+                    } else if (error && error.code !== 'PGRST116') {
+                        console.error('Supabase config fetch error:', error);
+                    }
+                } catch(e) { console.error('Supabase load error:', e); }
+            }
+            // Fallback to localStorage
+            if (Object.keys(saved).length === 0) {
+                saved = JSON.parse(localStorage.getItem('wedding_config')) || {};
+            }
             const config = { ...DEFAULT_CONFIG, ...saved };
 
             // 1. Set Global CSS Variables (Colors)
@@ -637,10 +661,7 @@
             document.getElementById('close-groom-name').innerText = config.groomName;
             document.getElementById('close-bride-name').innerText = config.brideName;
 
-            document.getElementById('couple-groom-fullname').innerText = config.groomFullName;
-            document.getElementById('couple-groom-parents').innerText = config.groomParents;
-            document.getElementById('couple-bride-fullname').innerText = config.brideFullName;
-            document.getElementById('couple-bride-parents').innerText = config.brideParents;
+            // Couple fullnames and parents are now handled by subTextMap
 
             // Event texts are now handled by subTextMap
             document.getElementById('event-maps-btn').href = config.mapsLink;
@@ -728,6 +749,10 @@
                 { id: 'ayat-arabic', textKey: 'ayatArabic', colorKey: 'colorAyatArabic' },
                 { id: 'ayat-translation', textKey: 'ayatTranslation', colorKey: 'colorAyatTranslation' },
                 { id: 'ayat-reference', textKey: 'ayatReference', colorKey: 'colorAyatReference' },
+                { id: 'couple-groom-fullname', textKey: 'groomFullName', colorKey: 'colorCoupleGroomName' },
+                { id: 'couple-groom-parents', textKey: 'groomParents', colorKey: 'colorGroomParents' },
+                { id: 'couple-bride-fullname', textKey: 'brideFullName', colorKey: 'colorCoupleBrideName' },
+                { id: 'couple-bride-parents', textKey: 'brideParents', colorKey: 'colorBrideParents' },
                 { id: 'event-akad-title', textKey: 'eventAkadTitle', colorKey: 'colorEventAkadTitle' },
                 { id: 'event-akad-date', textKey: 'akadDate', colorKey: 'colorAkadDate' },
                 { id: 'event-akad-time', textKey: 'akadTime', colorKey: 'colorAkadTime' },
@@ -952,10 +977,10 @@
         initApp();
     </script>
     <script>
-        function sendRSVP() {
+        async function sendRSVP() {
             const name = document.getElementById('rsvp-name').value.trim();
             const status = document.getElementById('rsvp-status').value;
-            const count = document.getElementById('rsvp-count').value;
+            const count = parseInt(document.getElementById('rsvp-count').value) || 1;
             const msg = document.getElementById('rsvp-message').value.trim();
             
             if(!name || !status || !msg) {
@@ -963,16 +988,32 @@
                 return;
             }
             
-            // Save wish to localStorage
+            // Save wish to Supabase
+            if (supabaseClient) {
+                try {
+                    const { error } = await supabaseClient.from('wedding_wishes').insert({
+                        name: name,
+                        status: status,
+                        count: count,
+                        message: msg
+                    });
+                    if (error) {
+                        console.error('Supabase insert error:', error);
+                    }
+                } catch(e) { console.error('Supabase wish save error:', e); }
+            }
+
+            // Also save to localStorage as fallback
             const wishes = JSON.parse(localStorage.getItem('wedding_wishes')) || [];
             wishes.unshift({
                 name: name,
                 status: status,
+                count: count,
                 message: msg,
-                timestamp: new Date().toISOString()
+                created_at: new Date().toISOString()
             });
             localStorage.setItem('wedding_wishes', JSON.stringify(wishes));
-            renderWishes();
+            await renderWishes();
 
             // Reset form fields
             document.getElementById('rsvp-name').value = '';
@@ -992,10 +1033,30 @@
             window.open(`https://api.whatsapp.com/send?phone=${phone}&text=${encodeURIComponent(text)}`, '_blank');
         }
 
-        function renderWishes() {
+        async function renderWishes() {
             const container = document.getElementById('wishes-container');
             const emptyMsg = document.getElementById('wishes-empty');
-            const wishes = JSON.parse(localStorage.getItem('wedding_wishes')) || [];
+            let wishes = [];
+
+            // Fetch from Supabase
+            if (supabaseClient) {
+                try {
+                    const { data, error } = await supabaseClient
+                        .from('wedding_wishes')
+                        .select('*')
+                        .order('created_at', { ascending: false });
+                    if (data && data.length > 0) {
+                        wishes = data;
+                    } else if (error) {
+                        console.error('Supabase wishes fetch error:', error);
+                    }
+                } catch(e) { console.error('Supabase wishes load error:', e); }
+            }
+
+            // Fallback to localStorage
+            if (wishes.length === 0) {
+                wishes = JSON.parse(localStorage.getItem('wedding_wishes')) || [];
+            }
             
             // Clear old rendered wishes (keep the empty message element)
             container.querySelectorAll('.wish-card').forEach(el => el.remove());
@@ -1007,7 +1068,7 @@
             emptyMsg.classList.add('hidden');
 
             wishes.forEach(w => {
-                const date = new Date(w.timestamp);
+                const date = new Date(w.created_at || w.timestamp);
                 const timeStr = date.toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' });
                 
                 const card = document.createElement('div');
