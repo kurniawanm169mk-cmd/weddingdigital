@@ -784,6 +784,16 @@
             // Couple Images
             document.getElementById('couple-groom-image').src = config.groomImage;
             document.getElementById('couple-bride-image').src = config.brideImage;
+            
+            // Couple Names Colors
+            if(config.colorCoupleGroomName) {
+                const el = document.getElementById('couple-groom-fullname');
+                if(el) el.style.color = config.colorCoupleGroomName;
+            }
+            if(config.colorCoupleBrideName) {
+                const el = document.getElementById('couple-bride-fullname');
+                if(el) el.style.color = config.colorCoupleBrideName;
+            }
 
             // Gallery Generation (up to 10)
             const galleryContainer = document.getElementById('gallery-container');

@@ -371,7 +371,10 @@
                                 </div>
                                 <div>
                                     <label class="block text-sm font-medium mb-1">Nama Lengkap & Gelar</label>
-                                    <input type="text" id="config-groomFullName" class="w-full rounded-lg border-gray-300 text-sm">
+                                    <div class="flex gap-2 items-center">
+                                        <input type="text" id="config-groomFullName" class="w-full rounded-lg border-gray-300 text-sm">
+                                        <input type="color" id="config-colorCoupleGroomName" class="h-8 w-10 rounded cursor-pointer shrink-0" value="#4a3b52">
+                                    </div>
                                 </div>
                                 <div>
                                     <label class="block text-sm font-medium mb-1">Info Orang Tua</label>
@@ -388,7 +391,10 @@
                                 </div>
                                 <div>
                                     <label class="block text-sm font-medium mb-1">Nama Lengkap & Gelar</label>
-                                    <input type="text" id="config-brideFullName" class="w-full rounded-lg border-gray-300 text-sm">
+                                    <div class="flex gap-2 items-center">
+                                        <input type="text" id="config-brideFullName" class="w-full rounded-lg border-gray-300 text-sm">
+                                        <input type="color" id="config-colorCoupleBrideName" class="h-8 w-10 rounded cursor-pointer shrink-0" value="#4a3b52">
+                                    </div>
                                 </div>
                                 <div>
                                     <label class="block text-sm font-medium mb-1">Info Orang Tua</label>
@@ -976,10 +982,10 @@ Wassalamu'alaikum Wr. Wb.
             rsvpPhone: "6281234567890",
 
             groomName: "Andy",
-            groomFullName: "Andy",
+            groomFullName: "Andy", colorCoupleGroomName: "#4a3b52",
             groomParents: "Putra dari Bapak Fulan\n& Ibu Fulanah",
             brideName: "Thea",
-            brideFullName: "Thea",
+            brideFullName: "Thea", colorCoupleBrideName: "#4a3b52",
             brideParents: "Putri dari Bapak Fulan\n& Ibu Fulanah",
             musicUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
             
