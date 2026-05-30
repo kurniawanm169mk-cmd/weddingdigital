@@ -14,6 +14,8 @@
     <script src="https://cdn.tailwindcss.com?plugins=forms"></script>
     <!-- Supabase SDK -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <!-- Environment Config (Secret Keys) -->
+    <script src="env.js"></script>
     <style>
         body { font-family: 'Montserrat', sans-serif; }
         .tab-content { display: none; }
@@ -21,6 +23,47 @@
     </style>
 </head>
 <body class="bg-gray-50 text-gray-800 antialiased min-h-screen pb-24">
+    <!-- LOGIN OVERLAY -->
+    <div id="login-overlay" class="fixed inset-0 z-[9999] bg-gradient-to-br from-green-900 via-green-800 to-emerald-900 flex items-center justify-center">
+        <div class="bg-white rounded-2xl shadow-2xl w-full max-w-sm mx-4 overflow-hidden">
+            <div class="bg-green-700 text-white text-center py-6 px-4">
+                <span class="material-symbols-outlined text-4xl mb-2">admin_panel_settings</span>
+                <h2 class="text-lg font-bold">Wedding Admin Panel</h2>
+                <p class="text-green-200 text-xs mt-1">Masukkan password untuk melanjutkan</p>
+            </div>
+            <div class="p-6">
+                <div class="space-y-4">
+                    <div>
+                        <label class="block text-xs font-semibold mb-1 text-gray-600">Password Admin</label>
+                        <input type="password" id="login-password" class="w-full text-sm p-3 rounded-lg border-gray-300 focus:ring-green-500 focus:border-green-500" placeholder="Masukkan password..." onkeydown="if(event.key==='Enter') attemptLogin()">
+                    </div>
+                    <p id="login-error" class="text-red-500 text-xs hidden">Password salah! Silakan coba lagi.</p>
+                    <button onclick="attemptLogin()" class="w-full bg-green-600 text-white py-3 rounded-lg text-sm font-bold hover:bg-green-700 transition-colors flex items-center justify-center gap-2">
+                        <span class="material-symbols-outlined text-[18px]">login</span> Masuk
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function attemptLogin() {
+            const pw = document.getElementById('login-password').value;
+            const correctPw = (typeof ENV !== 'undefined' && ENV.ADMIN_PASSWORD) ? ENV.ADMIN_PASSWORD : 'admin123';
+            if (pw === correctPw) {
+                sessionStorage.setItem('admin_auth', 'true');
+                document.getElementById('login-overlay').classList.add('hidden');
+            } else {
+                document.getElementById('login-error').classList.remove('hidden');
+                document.getElementById('login-password').value = '';
+                document.getElementById('login-password').focus();
+            }
+        }
+        // Auto-skip login if already authenticated this session
+        if (sessionStorage.getItem('admin_auth') === 'true') {
+            document.getElementById('login-overlay').classList.add('hidden');
+        }
+    </script>
+
     <!-- Navbar -->
     <nav class="bg-white shadow-sm border-b border-gray-200 sticky top-0 z-50">
         <div class="max-w-4xl mx-auto px-4 py-4 flex justify-between items-center">
@@ -288,6 +331,13 @@
                                     <input type="color" id="config-colorClosingDescription" class="h-8 w-10 rounded cursor-pointer shrink-0 mt-1" value="#43493e">
                                 </div>
                             </div>
+                            <div class="border-t pt-3 mt-2">
+                                <label class="block text-xs font-medium mb-1">Warna Nama Mempelai Penutup</label>
+                                <div class="flex gap-2 items-center">
+                                    <input type="color" id="config-colorClosingNames" class="h-8 w-12 rounded cursor-pointer shrink-0" value="#4a3b52">
+                                    <span class="text-[10px] text-gray-500">Warna khusus untuk teks "Andy & Thea" di halaman paling bawah.</span>
+                                </div>
+                            </div>
                         </div>
                     </details>
                 </div>
@@ -518,6 +568,20 @@
                                 <input type="text" id="config-bank2Holder" class="w-full rounded-lg border-gray-300 text-sm">
                             </div>
                         </div>
+                    </div>
+                </div>
+
+                <!-- UMUM -->
+                <h2 class="text-lg font-bold mb-6 mt-8 border-b pb-2">Pengaturan Umum & Kontak</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-semibold mb-1">Link Video / Live Streaming</label>
+                        <input type="url" id="config-videoUrl" class="w-full rounded-lg border-gray-300 text-sm" placeholder="https://youtube.com/...">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold mb-1">Nomor WhatsApp RSVP</label>
+                        <input type="text" id="config-rsvpPhone" class="w-full rounded-lg border-gray-300 text-sm" placeholder="6281234567890">
+                        <p class="text-[10px] text-gray-400 mt-1">Gunakan awalan 62 tanpa spasi.</p>
                     </div>
                 </div>
             </section>
@@ -775,6 +839,7 @@ Wassalamu'alaikum Wr. Wb.
             { id: 'couple', name: 'Profil Mempelai' },
             { id: 'event', name: 'Detail Acara' },
             { id: 'gallery', name: 'Galeri' },
+            { id: 'rsvp', name: 'RSVP' },
             { id: 'gift', name: 'Tanda Kasih' },
             { id: 'closing', name: 'Penutup' }
         ];
@@ -811,6 +876,21 @@ Wassalamu'alaikum Wr. Wb.
                                 <div>
                                     <div class="flex justify-between mb-1"><label class="text-xs font-medium text-gray-700">Opacity (%)</label><span id="val-bgOverlayOpacity_${sec.id}" class="text-[10px] text-gray-500 font-mono">40%</span></div>
                                     <input type="range" id="config-bgOverlayOpacity_${sec.id}" min="0" max="100" value="40" class="w-full h-1 bg-gray-200 rounded-lg appearance-none cursor-pointer" oninput="updateRangeVal('bgOverlayOpacity_${sec.id}')">
+                                </div>
+                            </div>
+                            <!-- Halaman RSVP -->
+                            <div class="p-4 border rounded-lg bg-gray-50 flex items-center justify-between">
+                                <div>
+                                    <p class="font-bold text-sm text-gray-800">RSVP & Wishes</p>
+                                    <p class="text-xs text-gray-500">Bayangan gradient hitam dari atas & bawah</p>
+                                </div>
+                                <div class="flex gap-4">
+                                    <label class="flex items-center gap-2 cursor-pointer">
+                                        <input type="checkbox" id="config-bgFadeTop_rsvp" class="rounded text-green-600"> Atas
+                                    </label>
+                                    <label class="flex items-center gap-2 cursor-pointer">
+                                        <input type="checkbox" id="config-bgFadeBottom_rsvp" class="rounded text-green-600"> Bawah
+                                    </label>
                                 </div>
                             </div>
                             <!-- Blend Mode & Mask -->
@@ -869,6 +949,7 @@ Wassalamu'alaikum Wr. Wb.
             colorTitleGallery: "#9d8b88",
             colorTitleGift: "#9d8b88",
             colorTitleClosing: "#9d8b88",
+            colorClosingNames: "#4a3b52",
 
             // Sub-texts per section
             coverLabelWedding: "The Wedding Of",
@@ -889,6 +970,10 @@ Wassalamu'alaikum Wr. Wb.
             closingSalam: "Wassalamu'alaikum Warahmatullahi Wabarakatuh",
             closingDescription: "Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir untuk memberikan doa restu.",
             colorClosingSalam: "", colorClosingDescription: "",
+            rsvpTitle: "RSVP & WISHES", colorRsvpTitle: "#9d8b88",
+            rsvpDescription: "Kehadiran Anda merupakan kehormatan bagi kami. Mohon konfirmasi kehadiran Anda melalui form di bawah ini.",
+            rsvpBtnText: "KIRIM VIA WHATSAPP",
+            rsvpPhone: "6281234567890",
 
             groomName: "Andy",
             groomFullName: "Andy",
@@ -943,6 +1028,19 @@ Wassalamu'alaikum Wr. Wb.
         DEFAULT_CONFIG[`bgImage_cover`] = "https://images.unsplash.com/photo-1519225421980-715cb0215aed?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80";
         DEFAULT_CONFIG[`bgImage_hero`] = "https://images.unsplash.com/photo-1519225421980-715cb0215aed?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80";
         DEFAULT_CONFIG[`bgFadeBottom_hero`] = true; 
+        
+        // Extended Fade Defaults
+        Object.assign(DEFAULT_CONFIG, {
+            bgFadeTop_cover: false, bgFadeBottom_cover: true,
+            bgFadeTop_hero: false, bgFadeBottom_hero: true,
+            bgFadeTop_ayat: false, bgFadeBottom_ayat: false,
+            bgFadeTop_couple: false, bgFadeBottom_couple: false,
+            bgFadeTop_event: false, bgFadeBottom_event: false,
+            bgFadeTop_gallery: false, bgFadeBottom_gallery: false,
+            bgFadeTop_rsvp: false, bgFadeBottom_rsvp: false,
+            bgFadeTop_gift: false, bgFadeBottom_gift: false,
+            bgFadeTop_closing: false, bgFadeBottom_closing: false
+        });
 
         const PRESETS = {
             sage: { primary: "#173809", secondary: "#735c00", bg: "#fcf9f1", body: "#2d3826" },
@@ -953,9 +1051,9 @@ Wassalamu'alaikum Wr. Wb.
         };
 
         // --- SUPABASE CONFIGURATION ---
-        const supabaseUrl = 'https://nujxevafxamuwspxkhnm.supabase.co';
-        const supabaseKey = 'sb_secret_g3yEmcS8L359W83eeK0gjw_GqBbL6UY';
-        const supabaseClient = window.supabase.createClient(supabaseUrl, supabaseKey);
+        const supabaseUrl = (typeof ENV !== 'undefined' && ENV.SUPABASE_URL) ? ENV.SUPABASE_URL : '';
+        const supabaseKey = (typeof ENV !== 'undefined' && ENV.SUPABASE_KEY) ? ENV.SUPABASE_KEY : '';
+        const supabaseClient = (supabaseUrl && supabaseKey) ? window.supabase.createClient(supabaseUrl, supabaseKey) : null;
 
         async function uploadToSupabase(file, folder) {
             const fileExt = file.name.split('.').pop() || 'jpg';

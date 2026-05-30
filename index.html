@@ -344,6 +344,64 @@
             </div>
         </section>
 
+        <!-- 6. RSVP & Wishes Section -->
+        <section class="relative min-h-screen py-section-gap px-edge-margin flex flex-col items-center justify-center fade-in-up overflow-hidden" id="rsvp">
+            <div class="absolute inset-0 z-0 bg-surface">
+                <img id="bg-img-rsvp" class="w-full h-full object-cover transition-all duration-300 hidden" src="">
+                <div id="bg-overlay-rsvp" class="absolute inset-0 transition-all duration-300"></div>
+                <div id="bg-grad-top-rsvp" class="absolute inset-0 bg-gradient-to-b from-background via-transparent to-transparent hidden"></div>
+                <div id="bg-grad-bottom-rsvp" class="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent hidden"></div>
+            </div>
+            
+            <div class="relative z-10 flex flex-col items-center w-full max-w-md">
+                <h2 id="heading-rsvp" class="font-section-title text-secondary mb-8 text-center tracking-[0.3em]">RSVP & WISHES</h2>
+                
+                <p id="rsvp-description" class="text-sm text-center mb-8 font-body-sm text-on-surface-variant">
+                    Kehadiran Anda merupakan kehormatan bagi kami. Mohon konfirmasi kehadiran Anda melalui form di bawah ini.
+                </p>
+                
+                <div class="w-full bg-white/60 backdrop-blur-sm p-6 rounded-2xl shadow-sm border border-black/5">
+                    <form id="rsvp-form" class="space-y-4">
+                        <div>
+                            <label class="block text-xs font-semibold mb-1 text-primary">Nama Lengkap</label>
+                            <input type="text" id="rsvp-name" class="w-full text-sm p-3 rounded-lg border-gray-200 bg-white/80 focus:ring-secondary focus:border-secondary transition-all" placeholder="Tulis nama Anda" required>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold mb-1 text-primary">Konfirmasi Kehadiran</label>
+                            <select id="rsvp-status" class="w-full text-sm p-3 rounded-lg border-gray-200 bg-white/80 focus:ring-secondary focus:border-secondary transition-all" required>
+                                <option value="" disabled selected>Pilih status kehadiran...</option>
+                                <option value="Hadir">Ya, Saya akan hadir</option>
+                                <option value="Tidak Hadir">Maaf, saya tidak bisa hadir</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold mb-1 text-primary">Jumlah Tamu</label>
+                            <select id="rsvp-count" class="w-full text-sm p-3 rounded-lg border-gray-200 bg-white/80 focus:ring-secondary focus:border-secondary transition-all" required>
+                                <option value="1">1 Orang</option>
+                                <option value="2">2 Orang</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold mb-1 text-primary">Ucapan & Doa</label>
+                            <textarea id="rsvp-message" class="w-full text-sm p-3 rounded-lg border-gray-200 bg-white/80 focus:ring-secondary focus:border-secondary transition-all h-24" placeholder="Tulis ucapan selamat dan doa untuk mempelai..." required></textarea>
+                        </div>
+                        
+                        <button type="button" onclick="sendRSVP()" class="w-full bg-primary text-white py-3 rounded-lg text-sm font-semibold hover:bg-primary-light transition-colors mt-2" id="btn-rsvp">
+                            KIRIM VIA WHATSAPP
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Wishes Display -->
+                <div class="w-full mt-10">
+                    <h3 class="font-section-title text-secondary text-center text-xs tracking-[0.2em] mb-6">UCAPAN & DOA</h3>
+                    <div id="wishes-container" class="space-y-4 max-h-[400px] overflow-y-auto hide-scroll">
+                        <p id="wishes-empty" class="text-center text-on-surface-variant/50 text-xs font-body-sm italic py-8">Belum ada ucapan. Jadilah yang pertama!</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <!-- 7. Digital Gift -->
         <section class="relative min-h-screen py-section-gap px-edge-margin bg-surface-container-low flex flex-col items-center justify-center fade-in-up overflow-hidden" id="gift">
             <!-- Background Layer -->
@@ -398,8 +456,8 @@
                     Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir untuk memberikan doa restu.
                 </p>
                 <p id="heading-closing" class="font-section-title text-secondary mb-3 tracking-[0.3em] text-sm">KAMI YANG BERBAHAGIA</p>
-                <h2 class="font-cursive text-primary tracking-tight text-5xl mt-2 flex items-center gap-2">
-                    <span id="close-groom-name">Andy</span> &amp; <span id="close-bride-name">Thea</span>
+                <h2 id="close-names-container" class="font-cursive text-primary tracking-tight text-5xl mt-2 flex items-center gap-2">
+                    <span id="close-groom-name">Andy</span> <span class="text-3xl opacity-80">&amp;</span> <span id="close-bride-name">Thea</span>
                 </h2>
             </div>
         </section>
@@ -430,7 +488,7 @@
     <!-- Scripts -->
     <script>
         // Section Definition for Backgrounds
-        const bgSections = ['cover', 'hero', 'ayat', 'couple', 'event', 'gallery', 'gift', 'closing'];
+        const bgSections = ['cover', 'hero', 'ayat', 'couple', 'event', 'gallery', 'rsvp', 'gift', 'closing'];
 
         // Data Default 
         const DEFAULT_CONFIG = {
@@ -476,6 +534,7 @@
             titleGallery: "GALLERY", colorTitleGallery: "#9d8b88",
             titleGift: "TANDA KASIH", colorTitleGift: "#9d8b88",
             titleClosing: "KAMI YANG BERBAHAGIA", colorTitleClosing: "#9d8b88",
+            colorClosingNames: "#4a3b52",
 
             // Sub-texts per section
             coverLabelWedding: "The Wedding Of",
@@ -683,7 +742,10 @@
                 { id: 'event-maps-text', textKey: 'eventMapsText' },
                 { id: 'gift-description', textKey: 'giftDescription' },
                 { id: 'closing-salam', textKey: 'closingSalam', colorKey: 'colorClosingSalam' },
-                { id: 'closing-description', textKey: 'closingDescription', colorKey: 'colorClosingDescription' }
+                { id: 'closing-description', textKey: 'closingDescription', colorKey: 'colorClosingDescription' },
+                { id: 'heading-rsvp', textKey: 'rsvpTitle', colorKey: 'colorRsvpTitle' },
+                { id: 'rsvp-description', textKey: 'rsvpDescription' },
+                { id: 'btn-rsvp', textKey: 'rsvpBtnText' }
             ];
             subTextMap.forEach(item => {
                 const el = document.getElementById(item.id);
@@ -703,6 +765,12 @@
             
             if(groomTypo) groomNames.forEach(id => { const el = document.getElementById(id); if(el) applyTypography(el, groomTypo); });
             if(brideTypo) brideNames.forEach(id => { const el = document.getElementById(id); if(el) applyTypography(el, brideTypo); });
+            
+            // Closing Names specific color
+            if(config.colorClosingNames) {
+                const el = document.getElementById('close-names-container');
+                if(el) el.style.color = config.colorClosingNames;
+            }
 
             function applyTypography(el, typo) {
                 if(typo.size && typo.size !== "1") el.style.fontSize = typo.size + 'rem';
@@ -867,6 +935,93 @@
 
         // Run Init
         initApp();
+    </script>
+    <script>
+        function sendRSVP() {
+            const name = document.getElementById('rsvp-name').value.trim();
+            const status = document.getElementById('rsvp-status').value;
+            const count = document.getElementById('rsvp-count').value;
+            const msg = document.getElementById('rsvp-message').value.trim();
+            
+            if(!name || !status || !msg) {
+                alert("Mohon lengkapi semua kolom RSVP");
+                return;
+            }
+            
+            // Save wish to localStorage
+            const wishes = JSON.parse(localStorage.getItem('wedding_wishes')) || [];
+            wishes.unshift({
+                name: name,
+                status: status,
+                message: msg,
+                timestamp: new Date().toISOString()
+            });
+            localStorage.setItem('wedding_wishes', JSON.stringify(wishes));
+            renderWishes();
+
+            // Reset form fields
+            document.getElementById('rsvp-name').value = '';
+            document.getElementById('rsvp-status').selectedIndex = 0;
+            document.getElementById('rsvp-message').value = '';
+            
+            // Send via WhatsApp
+            const config = JSON.parse(localStorage.getItem('wedding_config')) || {};
+            const phone = config.rsvpPhone || "6281234567890";
+            
+            let text = `Halo, saya ingin mengkonfirmasi kehadiran undangan pernikahan:\n\n`;
+            text += `*Nama:* ${name}\n`;
+            text += `*Kehadiran:* ${status}\n`;
+            if(status === 'Hadir') text += `*Jumlah Tamu:* ${count} Orang\n`;
+            text += `*Ucapan:* ${msg}\n`;
+            
+            window.open(`https://api.whatsapp.com/send?phone=${phone}&text=${encodeURIComponent(text)}`, '_blank');
+        }
+
+        function renderWishes() {
+            const container = document.getElementById('wishes-container');
+            const emptyMsg = document.getElementById('wishes-empty');
+            const wishes = JSON.parse(localStorage.getItem('wedding_wishes')) || [];
+            
+            // Clear old rendered wishes (keep the empty message element)
+            container.querySelectorAll('.wish-card').forEach(el => el.remove());
+            
+            if(wishes.length === 0) {
+                emptyMsg.classList.remove('hidden');
+                return;
+            }
+            emptyMsg.classList.add('hidden');
+
+            wishes.forEach(w => {
+                const date = new Date(w.timestamp);
+                const timeStr = date.toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' });
+                
+                const card = document.createElement('div');
+                card.className = 'wish-card bg-white/60 backdrop-blur-sm p-4 rounded-xl border border-black/5 shadow-sm transition-all';
+                card.innerHTML = `
+                    <div class="flex items-start justify-between mb-2">
+                        <div class="flex items-center gap-2">
+                            <div class="w-8 h-8 rounded-full bg-secondary/20 flex items-center justify-center text-secondary text-xs font-bold">${w.name.charAt(0).toUpperCase()}</div>
+                            <div>
+                                <p class="font-semibold text-sm text-primary font-body-sm">${escapeHtml(w.name)}</p>
+                                <p class="text-[10px] text-on-surface-variant/60 font-body-sm">${timeStr}</p>
+                            </div>
+                        </div>
+                        <span class="text-[10px] px-2 py-0.5 rounded-full font-body-sm font-semibold ${w.status === 'Hadir' ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-600'}">${w.status}</span>
+                    </div>
+                    <p class="text-sm text-on-surface-variant font-body-sm leading-relaxed">${escapeHtml(w.message)}</p>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        // Load wishes on page init
+        renderWishes();
     </script>
 </body>
 </html>
