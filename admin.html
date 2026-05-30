@@ -715,19 +715,19 @@ Wassalamu'alaikum Wr. Wb.
         // --- SUPABASE CONFIGURATION ---
         const supabaseUrl = 'https://nujxevafxamuwspxkhnm.supabase.co';
         const supabaseKey = 'sb_secret_g3yEmcS8L359W83eeK0gjw_GqBbL6UY';
-        const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
+        const supabaseClient = window.supabase.createClient(supabaseUrl, supabaseKey);
 
         async function uploadToSupabase(file, folder) {
             const fileExt = file.name.split('.').pop() || 'jpg';
             const fileName = `${folder}/${Date.now()}_${Math.random().toString(36).substring(7)}.${fileExt}`;
             
-            const { data, error } = await supabase.storage
+            const { data, error } = await supabaseClient.storage
                 .from('wedding-media')
                 .upload(fileName, file, { cacheControl: '3600', upsert: false });
                 
             if (error) throw error;
             
-            const { data: publicUrlData } = supabase.storage
+            const { data: publicUrlData } = supabaseClient.storage
                 .from('wedding-media')
                 .getPublicUrl(fileName);
                 
