@@ -137,7 +137,7 @@
         <div class="relative z-10 flex flex-col items-center px-4 w-full h-full min-h-[100dvh] justify-between py-10">
             
             <div class="flex flex-col items-center mt-12 w-full cover-subtext text-white">
-                <p class="text-md drop-shadow-md mb-0 tracking-wide font-body-sm">The Wedding Of</p>
+                <p id="cover-label-wedding" class="text-md drop-shadow-md mb-0 tracking-wide font-body-sm">The Wedding Of</p>
                 <h1 class="font-cursive text-7xl md:text-8xl drop-shadow-lg tracking-wide my-4 leading-none flex items-center justify-center flex-wrap gap-x-2 cover-main-text text-white">
                     <span id="cover-groom-name">Andy</span> <span class="text-4xl opacity-90 mx-2 cover-main-text text-white">&amp;</span> <span id="cover-bride-name">Thea</span>
                 </h1>
@@ -145,20 +145,20 @@
             </div>
             
             <div class="flex flex-col items-center mt-auto w-full max-w-sm cover-subtext text-white">
-                <p class="text-xs drop-shadow-md font-body-sm mb-1 opacity-90">Kpd Bpk/Ibu/Saudara/i</p>
+                <p id="cover-guest-prefix" class="text-xs drop-shadow-md font-body-sm mb-1 opacity-90">Kpd Bpk/Ibu/Saudara/i</p>
                 <div class="font-body-sm text-2xl font-bold mb-1 drop-shadow-lg" id="guest-name-display">Nama Tamu Undangan</div>
                 <div class="font-label-gold text-[9px] bg-white/20 backdrop-blur px-3 py-1 rounded-full uppercase tracking-widest mt-1 hidden border border-white/30" id="guest-label-display">Tamu</div>
                 
-                <p class="text-[90%] text-xs md:text-sm drop-shadow-md mt-6 mb-6 font-body-sm px-4 leading-relaxed">
+                <p id="cover-invitation-text" class="text-[90%] text-xs md:text-sm drop-shadow-md mt-6 mb-6 font-body-sm px-4 leading-relaxed">
                     Tanpa Mengurangi Rasa Hormat, Kami Mengundang Anda Untuk Berhadir Di Acara Pernikahan Kami.
                 </p>
                 
                 <button onclick="openInvitation()" class="bg-transparent border border-current font-body-sm text-sm px-6 rounded-md shadow-sm hover:bg-white/20 hover:backdrop-blur-sm transition-all active:scale-95 flex items-center gap-2 py-2 mb-8" style="color: inherit; border-color: currentColor;">
                     <span class="material-symbols-outlined text-[18px]">drafts</span>
-                    <span>Buka Undangan</span>
+                    <span id="cover-btn-text">Buka Undangan</span>
                 </button>
                 
-                <p class="opacity-60 text-[10px] md:text-xs drop-shadow-md font-body-sm px-4">
+                <p id="cover-disclaimer" class="opacity-60 text-[10px] md:text-xs drop-shadow-md font-body-sm px-4">
                     Mohon maaf apabila ada kesalahan penulisan nama, gelar dan alamat.
                 </p>
             </div>
@@ -181,13 +181,13 @@
                 <div class="pt-12 mb-8"><img src="https://lh3.googleusercontent.com/aida-public/AB6AXuAurIj6LqXlQ_dTmfi6d6Q8EH6k1qdvRwyKvSBxMuHSc6HR2yj2fm8ajyRngBg5Ws4GCdSinXdacBeOb3iZkZGw7nIp3Yil-RcMI-ToA3OEHXTMXGYA-zrflGm8udrsrW7nly2Mby__N-AFB5m9g6P3e5MGokPrAFhFx_nN8NHKSuWzdIPLVK6w6btxjsngIAxQml8JOSelavwyWalKLFCA7AiUMYhdqvvalJUgTwjsNF-ZSkoOT42I1oRzrWnBkHJG8-c0kXi9dvo" alt="Bismillah" class="w-64 h-auto mx-auto opacity-80 hero-subtext text-secondary-fixed" style="filter: invert(95%) sepia(10%) saturate(500%) hue-rotate(340deg) brightness(105%) contrast(90%);"></div>
                 
                 <div class="space-y-4 text-center mb-6 hero-subtext">
-                    <p class="font-section-title text-[10px] uppercase tracking-[0.3em]">Kami Yang Berbahagia</p>
+                    <p id="hero-subtitle" class="font-section-title text-[10px] uppercase tracking-[0.3em]">Kami Yang Berbahagia</p>
                     <h1 class="font-cursive text-6xl tracking-wide py-4 flex flex-col items-center gap-2 hero-main-text text-primary">
                         <span id="hero-groom-name">Andy</span> 
                         <span class="text-3xl opacity-70 hero-main-text">&amp;</span> 
                         <span id="hero-bride-name">Thea</span>
                     </h1>
-                    <p class="font-body-sm max-w-[280px] mx-auto text-sm">
+                    <p id="hero-closing-text" class="font-body-sm max-w-[280px] mx-auto text-sm">
                         Atas kehadiran dan doa restunya kami ucapkan terima kasih
                     </p>
                 </div>
@@ -205,13 +205,13 @@
             
             <div class="relative z-10 flex flex-col items-center">
                 <span class="material-symbols-outlined text-secondary text-4xl mb-6 opacity-80" style="font-variation-settings: 'FILL' 1;">favorite</span>
-                <p class="text-2xl font-serif text-primary leading-relaxed mb-6" dir="rtl">
+                <p id="ayat-arabic" class="text-2xl font-serif text-primary leading-relaxed mb-6" dir="rtl">
                     وَمِنْ ءَايَٰتِهِۦٓ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَٰجًا لِّتَسْكُنُوٓا۟ إِلَيْهَا وَجَعَلَ بَيْنَكُم مَّوَدَّةً وَرَحْمَةً ۚ إِنَّ فِى ذَٰلِكَ لَءَايَٰتٍ لِّقَوْمٍ يَتَفَكَّرُونَ
                 </p>
-                <p class="font-body-sm text-on-surface-variant italic mb-4 max-w-sm text-sm">
+                <p id="ayat-translation" class="font-body-sm text-on-surface-variant italic mb-4 max-w-sm text-sm">
                     "Dan di antara tanda-tanda kekuasaan-Nya ialah Dia menciptakan untukmu istri-istri dari jenismu sendiri, supaya kamu cenderung dan merasa tenteram kepadanya, dan dijadikan-Nya diantaramu rasa kasih dan sayang."
                 </p>
-                <p class="font-section-title text-secondary text-sm">(QS. Ar-Rum: 21)</p>
+                <p id="ayat-reference" class="font-section-title text-secondary text-sm">(QS. Ar-Rum: 21)</p>
             </div>
         </section>
 
@@ -286,7 +286,7 @@
                     <!-- Akad Card -->
                     <div class="bg-surface rounded-2xl p-inner-padding border border-secondary/20 shadow-lg text-center relative overflow-hidden">
                         <div class="absolute top-0 left-1/2 -translate-x-1/2 w-16 h-1 bg-secondary rounded-b-full"></div>
-                        <h3 class="font-headline-name-mobile text-primary mt-4 mb-3 text-2xl">Akad Nikah</h3>
+                        <h3 id="event-akad-title" class="font-headline-name-mobile text-primary mt-4 mb-3 text-2xl">Akad Nikah</h3>
                         <div class="flex items-center justify-center text-on-surface-variant mb-2 gap-2">
                             <span class="material-symbols-outlined text-[16px]">calendar_today</span>
                             <span class="font-body-sm text-sm" id="event-akad-date">Jumat, 12 Desember 2025</span>
@@ -301,7 +301,7 @@
                     <!-- Resepsi Card -->
                     <div class="bg-surface rounded-2xl p-inner-padding border border-secondary/20 shadow-lg text-center relative overflow-hidden">
                         <div class="absolute top-0 left-1/2 -translate-x-1/2 w-16 h-1 bg-secondary rounded-b-full"></div>
-                        <h3 class="font-headline-name-mobile text-primary mt-4 mb-3 text-2xl">Resepsi</h3>
+                        <h3 id="event-resepsi-title" class="font-headline-name-mobile text-primary mt-4 mb-3 text-2xl">Resepsi</h3>
                         <div class="flex items-center justify-center text-on-surface-variant mb-2 gap-2">
                             <span class="material-symbols-outlined text-[16px]">calendar_today</span>
                             <span class="font-body-sm text-sm" id="event-resepsi-date">Jumat, 12 Desember 2025</span>
@@ -315,7 +315,7 @@
                     </div>
                     <a id="event-maps-btn" href="#" target="_blank" class="w-full min-h-[44px] bg-primary-container text-white font-label-gold text-[11px] py-4 rounded-full shadow-md flex items-center justify-center gap-2 mt-4 hover:opacity-90 transition-opacity">
                         <span class="material-symbols-outlined text-[18px]">location_on</span>
-                        <span>BUKA GOOGLE MAPS</span>
+                        <span id="event-maps-text">BUKA GOOGLE MAPS</span>
                     </a>
                 </div>
             </div>
@@ -349,7 +349,7 @@
 
             <div class="relative z-10 flex flex-col items-center w-full">
                 <h2 id="heading-gift" class="font-section-title text-secondary mb-4 text-center tracking-[0.3em]">TANDA KASIH</h2>
-                <p class="font-body-sm text-on-surface-variant text-center mb-8 max-w-sm text-sm">
+                <p id="gift-description" class="font-body-sm text-on-surface-variant text-center mb-8 max-w-sm text-sm">
                     Doa restu Anda merupakan karunia yang sangat berarti. Jika Anda bermaksud memberikan tanda kasih, dapat melalui:
                 </p>
                 <div class="w-full space-y-4">
@@ -385,8 +385,8 @@
             </div>
 
             <div class="relative z-10 flex flex-col items-center w-full">
-                <p class="font-display-bismillah text-secondary text-2xl mb-6">Wassalamu'alaikum Warahmatullahi Wabarakatuh</p>
-                <p class="font-body-sm text-on-surface-variant max-w-sm mb-8 text-sm">
+                <p id="closing-salam" class="font-display-bismillah text-secondary text-2xl mb-6">Wassalamu'alaikum Warahmatullahi Wabarakatuh</p>
+                <p id="closing-description" class="font-body-sm text-on-surface-variant max-w-sm mb-8 text-sm">
                     Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir untuk memberikan doa restu.
                 </p>
                 <p id="heading-closing" class="font-section-title text-secondary mb-3 tracking-[0.3em] text-sm">KAMI YANG BERBAHAGIA</p>
@@ -467,7 +467,32 @@
             titleEvent: "WEDDING EVENTS", colorTitleEvent: "#9d8b88",
             titleGallery: "GALLERY", colorTitleGallery: "#9d8b88",
             titleGift: "TANDA KASIH", colorTitleGift: "#9d8b88",
-            titleClosing: "KAMI YANG BERBAHAGIA", colorTitleClosing: "#9d8b88"
+            titleClosing: "KAMI YANG BERBAHAGIA", colorTitleClosing: "#9d8b88",
+
+            // Sub-texts per section
+            coverLabelWedding: "The Wedding Of",
+            coverGuestPrefix: "Kpd Bpk/Ibu/Saudara/i",
+            coverInvitationText: "Tanpa Mengurangi Rasa Hormat, Kami Mengundang Anda Untuk Berhadir Di Acara Pernikahan Kami.",
+            coverBtnText: "Buka Undangan",
+            coverDisclaimer: "Mohon maaf apabila ada kesalahan penulisan nama, gelar dan alamat.",
+
+            heroSubtitle: "Kami Yang Berbahagia",
+            heroClosingText: "Atas kehadiran dan doa restunya kami ucapkan terima kasih",
+
+            ayatArabic: "وَمِنْ ءَايَٰتِهِۦٓ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَٰجًا لِّتَسْكُنُوٓا۟ إِلَيْهَا وَجَعَلَ بَيْنَكُم مَّوَدَّةً وَرَحْمَةً ۚ إِنَّ فِى ذَٰلِكَ لَءَايَٰتٍ لِّقَوْمٍ يَتَفَكَّرُونَ",
+            ayatTranslation: '"Dan di antara tanda-tanda kekuasaan-Nya ialah Dia menciptakan untukmu istri-istri dari jenismu sendiri, supaya kamu cenderung dan merasa tenteram kepadanya, dan dijadikan-Nya diantaramu rasa kasih dan sayang."',
+            ayatReference: "(QS. Ar-Rum: 21)",
+            colorAyatArabic: "", colorAyatTranslation: "", colorAyatReference: "",
+
+            eventAkadTitle: "Akad Nikah", eventResepsiTitle: "Resepsi",
+            eventMapsText: "BUKA GOOGLE MAPS",
+            colorEventAkadTitle: "", colorEventResepsiTitle: "",
+
+            giftDescription: "Doa restu Anda merupakan karunia yang sangat berarti. Jika Anda bermaksud memberikan tanda kasih, dapat melalui:",
+
+            closingSalam: "Wassalamu'alaikum Warahmatullahi Wabarakatuh",
+            closingDescription: "Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir untuk memberikan doa restu.",
+            colorClosingSalam: "", colorClosingDescription: ""
         };
 
         // Initialize Dynamic BG Defaults
@@ -627,6 +652,33 @@
                 if (el) {
                     if (config[h.textKey]) el.innerText = config[h.textKey];
                     if (config[h.colorKey]) el.style.color = config[h.colorKey];
+                }
+            });
+
+            // 6. Set ALL Sub-Texts & Colors per Section
+            const subTextMap = [
+                { id: 'cover-label-wedding', textKey: 'coverLabelWedding' },
+                { id: 'cover-guest-prefix', textKey: 'coverGuestPrefix' },
+                { id: 'cover-invitation-text', textKey: 'coverInvitationText' },
+                { id: 'cover-btn-text', textKey: 'coverBtnText' },
+                { id: 'cover-disclaimer', textKey: 'coverDisclaimer' },
+                { id: 'hero-subtitle', textKey: 'heroSubtitle' },
+                { id: 'hero-closing-text', textKey: 'heroClosingText' },
+                { id: 'ayat-arabic', textKey: 'ayatArabic', colorKey: 'colorAyatArabic' },
+                { id: 'ayat-translation', textKey: 'ayatTranslation', colorKey: 'colorAyatTranslation' },
+                { id: 'ayat-reference', textKey: 'ayatReference', colorKey: 'colorAyatReference' },
+                { id: 'event-akad-title', textKey: 'eventAkadTitle', colorKey: 'colorEventAkadTitle' },
+                { id: 'event-resepsi-title', textKey: 'eventResepsiTitle', colorKey: 'colorEventResepsiTitle' },
+                { id: 'event-maps-text', textKey: 'eventMapsText' },
+                { id: 'gift-description', textKey: 'giftDescription' },
+                { id: 'closing-salam', textKey: 'closingSalam', colorKey: 'colorClosingSalam' },
+                { id: 'closing-description', textKey: 'closingDescription', colorKey: 'colorClosingDescription' }
+            ];
+            subTextMap.forEach(item => {
+                const el = document.getElementById(item.id);
+                if (el) {
+                    if (config[item.textKey]) el.innerText = config[item.textKey];
+                    if (item.colorKey && config[item.colorKey]) el.style.color = config[item.colorKey];
                 }
             });
             

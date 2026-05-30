@@ -51,6 +51,9 @@
                 <button onclick="switchTab('tab-bg-sections')" class="tab-btn w-full text-left px-4 py-3 rounded-lg text-sm font-semibold flex items-center gap-3 text-gray-600 hover:bg-gray-50" data-target="tab-bg-sections">
                     <span class="material-symbols-outlined">wallpaper</span> Background Hal.
                 </button>
+                <button onclick="switchTab('tab-teks')" class="tab-btn w-full text-left px-4 py-3 rounded-lg text-sm font-semibold flex items-center gap-3 text-gray-600 hover:bg-gray-50" data-target="tab-teks">
+                    <span class="material-symbols-outlined">text_fields</span> Edit Teks Halaman
+                </button>
                 <button onclick="switchTab('tab-mempelai')" class="tab-btn w-full text-left px-4 py-3 rounded-lg text-sm font-semibold flex items-center gap-3 text-gray-600 hover:bg-gray-50" data-target="tab-mempelai">
                     <span class="material-symbols-outlined">favorite</span> Profil Mempelai
                 </button>
@@ -136,6 +139,157 @@
                 </div>
                 <div id="dynamic-bg-sections" class="space-y-6">
                     <!-- JS akan merender pengaturan di sini -->
+                </div>
+            </section>
+
+            <!-- Tab: Edit Teks Halaman -->
+            <section id="tab-teks" class="tab-content bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+                <h2 class="text-lg font-bold mb-2 border-b pb-2">Edit Teks & Warna Per Halaman</h2>
+                <p class="text-xs text-gray-500 mb-6">Ubah semua teks dan warna sub-judul yang ada di setiap halaman undangan Anda.</p>
+
+                <div class="space-y-6">
+                    <!-- COVER PAGE -->
+                    <details class="bg-gray-50 rounded-lg border border-gray-200 overflow-hidden" open>
+                        <summary class="px-4 py-3 font-bold text-sm text-green-800 cursor-pointer hover:bg-gray-100 flex items-center gap-2">
+                            <span class="material-symbols-outlined text-[18px]">drafts</span> Halaman Buka Undangan (Cover)
+                        </summary>
+                        <div class="p-4 space-y-3 border-t">
+                            <div>
+                                <label class="block text-xs font-medium mb-1">Label Atas ("The Wedding Of")</label>
+                                <input type="text" id="config-coverLabelWedding" class="w-full rounded-lg border-gray-300 text-sm" placeholder="The Wedding Of">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium mb-1">Prefix Tamu ("Kpd Bpk/Ibu/Saudara/i")</label>
+                                <input type="text" id="config-coverGuestPrefix" class="w-full rounded-lg border-gray-300 text-sm" placeholder="Kpd Bpk/Ibu/Saudara/i">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium mb-1">Teks Undangan</label>
+                                <textarea id="config-coverInvitationText" class="w-full rounded-lg border-gray-300 text-sm h-16" placeholder="Tanpa Mengurangi Rasa Hormat..."></textarea>
+                            </div>
+                            <div class="grid grid-cols-2 gap-3">
+                                <div>
+                                    <label class="block text-xs font-medium mb-1">Teks Tombol</label>
+                                    <input type="text" id="config-coverBtnText" class="w-full rounded-lg border-gray-300 text-sm" placeholder="Buka Undangan">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-medium mb-1">Disclaimer</label>
+                                    <input type="text" id="config-coverDisclaimer" class="w-full rounded-lg border-gray-300 text-sm" placeholder="Mohon maaf apabila...">
+                                </div>
+                            </div>
+                        </div>
+                    </details>
+
+                    <!-- HERO PAGE -->
+                    <details class="bg-gray-50 rounded-lg border border-gray-200 overflow-hidden">
+                        <summary class="px-4 py-3 font-bold text-sm text-green-800 cursor-pointer hover:bg-gray-100 flex items-center gap-2">
+                            <span class="material-symbols-outlined text-[18px]">home</span> Halaman Utama (Hero)
+                        </summary>
+                        <div class="p-4 space-y-3 border-t">
+                            <div>
+                                <label class="block text-xs font-medium mb-1">Sub-judul Atas ("Kami Yang Berbahagia")</label>
+                                <input type="text" id="config-heroSubtitle" class="w-full rounded-lg border-gray-300 text-sm" placeholder="Kami Yang Berbahagia">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium mb-1">Teks Penutup Hero</label>
+                                <input type="text" id="config-heroClosingText" class="w-full rounded-lg border-gray-300 text-sm" placeholder="Atas kehadiran dan doa restunya...">
+                            </div>
+                        </div>
+                    </details>
+
+                    <!-- AYAT SECTION -->
+                    <details class="bg-gray-50 rounded-lg border border-gray-200 overflow-hidden">
+                        <summary class="px-4 py-3 font-bold text-sm text-green-800 cursor-pointer hover:bg-gray-100 flex items-center gap-2">
+                            <span class="material-symbols-outlined text-[18px]">menu_book</span> Halaman Ayat Suci
+                        </summary>
+                        <div class="p-4 space-y-3 border-t">
+                            <div>
+                                <label class="block text-xs font-medium mb-1">Teks Arab</label>
+                                <div class="flex gap-2 items-start">
+                                    <textarea id="config-ayatArabic" class="w-full rounded-lg border-gray-300 text-sm h-20" dir="rtl"></textarea>
+                                    <input type="color" id="config-colorAyatArabic" class="h-8 w-10 rounded cursor-pointer shrink-0 mt-1" value="#4a3b52">
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium mb-1">Terjemahan</label>
+                                <div class="flex gap-2 items-start">
+                                    <textarea id="config-ayatTranslation" class="w-full rounded-lg border-gray-300 text-sm h-20"></textarea>
+                                    <input type="color" id="config-colorAyatTranslation" class="h-8 w-10 rounded cursor-pointer shrink-0 mt-1" value="#43493e">
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium mb-1">Referensi Ayat</label>
+                                <div class="flex gap-2 items-center">
+                                    <input type="text" id="config-ayatReference" class="w-full rounded-lg border-gray-300 text-sm" placeholder="(QS. Ar-Rum: 21)">
+                                    <input type="color" id="config-colorAyatReference" class="h-8 w-10 rounded cursor-pointer shrink-0" value="#9d8b88">
+                                </div>
+                            </div>
+                        </div>
+                    </details>
+
+                    <!-- EVENT SECTION -->
+                    <details class="bg-gray-50 rounded-lg border border-gray-200 overflow-hidden">
+                        <summary class="px-4 py-3 font-bold text-sm text-green-800 cursor-pointer hover:bg-gray-100 flex items-center gap-2">
+                            <span class="material-symbols-outlined text-[18px]">event</span> Halaman Acara (Event)
+                        </summary>
+                        <div class="p-4 space-y-3 border-t">
+                            <div class="grid grid-cols-2 gap-3">
+                                <div>
+                                    <label class="block text-xs font-medium mb-1">Judul Akad</label>
+                                    <div class="flex gap-2 items-center">
+                                        <input type="text" id="config-eventAkadTitle" class="w-full rounded-lg border-gray-300 text-sm" placeholder="Akad Nikah">
+                                        <input type="color" id="config-colorEventAkadTitle" class="h-8 w-10 rounded cursor-pointer shrink-0" value="#4a3b52">
+                                    </div>
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-medium mb-1">Judul Resepsi</label>
+                                    <div class="flex gap-2 items-center">
+                                        <input type="text" id="config-eventResepsiTitle" class="w-full rounded-lg border-gray-300 text-sm" placeholder="Resepsi">
+                                        <input type="color" id="config-colorEventResepsiTitle" class="h-8 w-10 rounded cursor-pointer shrink-0" value="#4a3b52">
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium mb-1">Teks Tombol Maps</label>
+                                <input type="text" id="config-eventMapsText" class="w-full rounded-lg border-gray-300 text-sm" placeholder="BUKA GOOGLE MAPS">
+                            </div>
+                        </div>
+                    </details>
+
+                    <!-- GIFT SECTION -->
+                    <details class="bg-gray-50 rounded-lg border border-gray-200 overflow-hidden">
+                        <summary class="px-4 py-3 font-bold text-sm text-green-800 cursor-pointer hover:bg-gray-100 flex items-center gap-2">
+                            <span class="material-symbols-outlined text-[18px]">redeem</span> Halaman Tanda Kasih (Gift)
+                        </summary>
+                        <div class="p-4 space-y-3 border-t">
+                            <div>
+                                <label class="block text-xs font-medium mb-1">Deskripsi</label>
+                                <textarea id="config-giftDescription" class="w-full rounded-lg border-gray-300 text-sm h-16" placeholder="Doa restu Anda merupakan karunia..."></textarea>
+                            </div>
+                        </div>
+                    </details>
+
+                    <!-- CLOSING SECTION -->
+                    <details class="bg-gray-50 rounded-lg border border-gray-200 overflow-hidden">
+                        <summary class="px-4 py-3 font-bold text-sm text-green-800 cursor-pointer hover:bg-gray-100 flex items-center gap-2">
+                            <span class="material-symbols-outlined text-[18px]">waving_hand</span> Halaman Penutup (Closing)
+                        </summary>
+                        <div class="p-4 space-y-3 border-t">
+                            <div>
+                                <label class="block text-xs font-medium mb-1">Salam Penutup</label>
+                                <div class="flex gap-2 items-center">
+                                    <input type="text" id="config-closingSalam" class="w-full rounded-lg border-gray-300 text-sm" placeholder="Wassalamu'alaikum...">
+                                    <input type="color" id="config-colorClosingSalam" class="h-8 w-10 rounded cursor-pointer shrink-0" value="#9d8b88">
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium mb-1">Deskripsi Penutup</label>
+                                <div class="flex gap-2 items-start">
+                                    <textarea id="config-closingDescription" class="w-full rounded-lg border-gray-300 text-sm h-16" placeholder="Merupakan suatu kehormatan..."></textarea>
+                                    <input type="color" id="config-colorClosingDescription" class="h-8 w-10 rounded cursor-pointer shrink-0 mt-1" value="#43493e">
+                                </div>
+                            </div>
+                        </div>
+                    </details>
                 </div>
             </section>
 
@@ -649,6 +803,26 @@ Wassalamu'alaikum Wr. Wb.
             colorTitleGallery: "#9d8b88",
             colorTitleGift: "#9d8b88",
             colorTitleClosing: "#9d8b88",
+
+            // Sub-texts per section
+            coverLabelWedding: "The Wedding Of",
+            coverGuestPrefix: "Kpd Bpk/Ibu/Saudara/i",
+            coverInvitationText: "Tanpa Mengurangi Rasa Hormat, Kami Mengundang Anda Untuk Berhadir Di Acara Pernikahan Kami.",
+            coverBtnText: "Buka Undangan",
+            coverDisclaimer: "Mohon maaf apabila ada kesalahan penulisan nama, gelar dan alamat.",
+            heroSubtitle: "Kami Yang Berbahagia",
+            heroClosingText: "Atas kehadiran dan doa restunya kami ucapkan terima kasih",
+            ayatArabic: "وَمِنْ ءَايَٰتِهِۦٓ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَٰجًا لِّتَسْكُنُوٓا۟ إِلَيْهَا وَجَعَلَ بَيْنَكُم مَّوَدَّةً وَرَحْمَةً ۚ إِنَّ فِى ذَٰلِكَ لَءَايَٰتٍ لِّقَوْمٍ يَتَفَكَّرُونَ",
+            ayatTranslation: '"Dan di antara tanda-tanda kekuasaan-Nya ialah Dia menciptakan untukmu istri-istri dari jenismu sendiri, supaya kamu cenderung dan merasa tenteram kepadanya, dan dijadikan-Nya diantaramu rasa kasih dan sayang."',
+            ayatReference: "(QS. Ar-Rum: 21)",
+            colorAyatArabic: "", colorAyatTranslation: "", colorAyatReference: "",
+            eventAkadTitle: "Akad Nikah", eventResepsiTitle: "Resepsi",
+            eventMapsText: "BUKA GOOGLE MAPS",
+            colorEventAkadTitle: "", colorEventResepsiTitle: "",
+            giftDescription: "Doa restu Anda merupakan karunia yang sangat berarti. Jika Anda bermaksud memberikan tanda kasih, dapat melalui:",
+            closingSalam: "Wassalamu'alaikum Warahmatullahi Wabarakatuh",
+            closingDescription: "Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir untuk memberikan doa restu.",
+            colorClosingSalam: "", colorClosingDescription: "",
 
             groomName: "Andy",
             groomFullName: "Andy",
