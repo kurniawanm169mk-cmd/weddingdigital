@@ -520,8 +520,8 @@
             resepsiAddress: "Jl. Sudirman No. 123, Kota Impian",
             mapsLink: "https://maps.google.com",
             
-            bank1Name: "BCA", bank1Number: "1234567890", bank1Holder: "Andy",
-            bank2Name: "MANDIRI", bank2Number: "0987654321", bank2Holder: "Thea",
+            bank1Name: "BCA", colorBank1Name: "#4a3b52", bank1Number: "1234567890", colorBank1Number: "#1c1b1f", bank1Holder: "Andy", colorBank1Holder: "#43493e",
+            bank2Name: "MANDIRI", colorBank2Name: "#4a3b52", bank2Number: "0987654321", colorBank2Number: "#1c1b1f", bank2Holder: "Thea", colorBank2Holder: "#43493e",
             
             colorPrimary: "#4a3b52", colorSecondary: "#9d8b88", colorBg: "#fcf9f1",
             colorBody: "#43493e",
@@ -537,14 +537,14 @@
             colorClosingNames: "#4a3b52",
 
             // Sub-texts per section
-            coverLabelWedding: "The Wedding Of",
-            coverGuestPrefix: "Kpd Bpk/Ibu/Saudara/i",
-            coverInvitationText: "Tanpa Mengurangi Rasa Hormat, Kami Mengundang Anda Untuk Berhadir Di Acara Pernikahan Kami.",
-            coverBtnText: "Buka Undangan",
-            coverDisclaimer: "Mohon maaf apabila ada kesalahan penulisan nama, gelar dan alamat.",
+            coverLabelWedding: "The Wedding Of", colorCoverLabelWedding: "#43493e",
+            coverGuestPrefix: "Kpd Bpk/Ibu/Saudara/i", colorCoverGuestPrefix: "#43493e",
+            coverInvitationText: "Tanpa Mengurangi Rasa Hormat, Kami Mengundang Anda Untuk Berhadir Di Acara Pernikahan Kami.", colorCoverInvitationText: "#43493e",
+            coverBtnText: "Buka Undangan", colorCoverBtnText: "#ffffff",
+            coverDisclaimer: "Mohon maaf apabila ada kesalahan penulisan nama, gelar dan alamat.", colorCoverDisclaimer: "#43493e",
 
-            heroSubtitle: "Kami Yang Berbahagia",
-            heroClosingText: "Atas kehadiran dan doa restunya kami ucapkan terima kasih",
+            heroSubtitle: "Kami Yang Berbahagia", colorHeroSubtitle: "#43493e",
+            heroClosingText: "Atas kehadiran dan doa restunya kami ucapkan terima kasih", colorHeroClosingText: "#43493e",
 
             ayatArabic: "وَمِنْ ءَايَٰتِهِۦٓ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَٰجًا لِّتَسْكُنُوٓا۟ إِلَيْهَا وَجَعَلَ بَيْنَكُم مَّوَدَّةً وَرَحْمَةً ۚ إِنَّ فِى ذَٰلِكَ لَءَايَٰتٍ لِّقَوْمٍ يَتَفَكَّرُونَ",
             ayatTranslation: '"Dan di antara tanda-tanda kekuasaan-Nya ialah Dia menciptakan untukmu istri-istri dari jenismu sendiri, supaya kamu cenderung dan merasa tenteram kepadanya, dan dijadikan-Nya diantaramu rasa kasih dan sayang."',
@@ -552,14 +552,21 @@
             colorAyatArabic: "", colorAyatTranslation: "", colorAyatReference: "",
 
             eventAkadTitle: "Akad Nikah", eventResepsiTitle: "Resepsi",
-            eventMapsText: "BUKA GOOGLE MAPS",
+            eventMapsText: "BUKA GOOGLE MAPS", colorEventMapsText: "#ffffff",
             colorEventAkadTitle: "", colorEventResepsiTitle: "",
+            colorAkadDate: "#43493e", colorAkadTime: "#43493e", colorAkadVenue: "#4a3b52", colorAkadAddress: "#43493e",
+            colorResepsiDate: "#43493e", colorResepsiTime: "#43493e", colorResepsiVenue: "#4a3b52", colorResepsiAddress: "#43493e",
 
-            giftDescription: "Doa restu Anda merupakan karunia yang sangat berarti. Jika Anda bermaksud memberikan tanda kasih, dapat melalui:",
+            giftDescription: "Doa restu Anda merupakan karunia yang sangat berarti. Jika Anda bermaksud memberikan tanda kasih, dapat melalui:", colorGiftDescription: "#43493e",
 
             closingSalam: "Wassalamu'alaikum Warahmatullahi Wabarakatuh",
             closingDescription: "Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir untuk memberikan doa restu.",
-            colorClosingSalam: "", colorClosingDescription: ""
+            colorClosingSalam: "", colorClosingDescription: "",
+
+            rsvpTitle: "RSVP & WISHES", colorRsvpTitle: "#9d8b88",
+            rsvpDescription: "Kehadiran Anda merupakan kehormatan bagi kami. Mohon konfirmasi kehadiran Anda melalui form di bawah ini.", colorRsvpDescription: "#43493e",
+            rsvpBtnText: "KIRIM VIA WHATSAPP", colorRsvpBtnText: "#ffffff",
+            rsvpPhone: "6281234567890"
         };
 
         // Initialize Dynamic BG Defaults
@@ -635,24 +642,8 @@
             document.getElementById('couple-bride-fullname').innerText = config.brideFullName;
             document.getElementById('couple-bride-parents').innerText = config.brideParents;
 
-            document.getElementById('event-akad-date').innerText = config.akadDate;
-            document.getElementById('event-akad-time').innerText = config.akadTime;
-            document.getElementById('event-akad-venue').innerText = config.akadVenue;
-            document.getElementById('event-akad-address').innerText = config.akadAddress;
-
-            document.getElementById('event-resepsi-date').innerText = config.resepsiDate;
-            document.getElementById('event-resepsi-time').innerText = config.resepsiTime;
-            document.getElementById('event-resepsi-venue').innerText = config.resepsiVenue;
-            document.getElementById('event-resepsi-address').innerText = config.resepsiAddress;
+            // Event texts are now handled by subTextMap
             document.getElementById('event-maps-btn').href = config.mapsLink;
-
-            document.getElementById('gift-bank1-name').innerText = config.bank1Name;
-            document.getElementById('gift-bank1-number').innerText = config.bank1Number;
-            document.getElementById('gift-bank1-holder').innerText = config.bank1Holder;
-            
-            document.getElementById('gift-bank2-name').innerText = config.bank2Name;
-            document.getElementById('gift-bank2-number').innerText = config.bank2Number;
-            document.getElementById('gift-bank2-holder').innerText = config.bank2Holder;
 
             // 4. Set Dynamic Backgrounds & Masks per Section
             bgSections.forEach(s => {
@@ -727,25 +718,39 @@
 
             // 6. Set ALL Sub-Texts & Colors per Section
             const subTextMap = [
-                { id: 'cover-label-wedding', textKey: 'coverLabelWedding' },
-                { id: 'cover-guest-prefix', textKey: 'coverGuestPrefix' },
-                { id: 'cover-invitation-text', textKey: 'coverInvitationText' },
-                { id: 'cover-btn-text', textKey: 'coverBtnText' },
-                { id: 'cover-disclaimer', textKey: 'coverDisclaimer' },
-                { id: 'hero-subtitle', textKey: 'heroSubtitle' },
-                { id: 'hero-closing-text', textKey: 'heroClosingText' },
+                { id: 'cover-label-wedding', textKey: 'coverLabelWedding', colorKey: 'colorCoverLabelWedding' },
+                { id: 'cover-guest-prefix', textKey: 'coverGuestPrefix', colorKey: 'colorCoverGuestPrefix' },
+                { id: 'cover-invitation-text', textKey: 'coverInvitationText', colorKey: 'colorCoverInvitationText' },
+                { id: 'cover-btn-text', textKey: 'coverBtnText', colorKey: 'colorCoverBtnText' },
+                { id: 'cover-disclaimer', textKey: 'coverDisclaimer', colorKey: 'colorCoverDisclaimer' },
+                { id: 'hero-subtitle', textKey: 'heroSubtitle', colorKey: 'colorHeroSubtitle' },
+                { id: 'hero-closing-text', textKey: 'heroClosingText', colorKey: 'colorHeroClosingText' },
                 { id: 'ayat-arabic', textKey: 'ayatArabic', colorKey: 'colorAyatArabic' },
                 { id: 'ayat-translation', textKey: 'ayatTranslation', colorKey: 'colorAyatTranslation' },
                 { id: 'ayat-reference', textKey: 'ayatReference', colorKey: 'colorAyatReference' },
                 { id: 'event-akad-title', textKey: 'eventAkadTitle', colorKey: 'colorEventAkadTitle' },
+                { id: 'event-akad-date', textKey: 'akadDate', colorKey: 'colorAkadDate' },
+                { id: 'event-akad-time', textKey: 'akadTime', colorKey: 'colorAkadTime' },
+                { id: 'event-akad-venue', textKey: 'akadVenue', colorKey: 'colorAkadVenue' },
+                { id: 'event-akad-address', textKey: 'akadAddress', colorKey: 'colorAkadAddress' },
                 { id: 'event-resepsi-title', textKey: 'eventResepsiTitle', colorKey: 'colorEventResepsiTitle' },
-                { id: 'event-maps-text', textKey: 'eventMapsText' },
-                { id: 'gift-description', textKey: 'giftDescription' },
+                { id: 'event-resepsi-date', textKey: 'resepsiDate', colorKey: 'colorResepsiDate' },
+                { id: 'event-resepsi-time', textKey: 'resepsiTime', colorKey: 'colorResepsiTime' },
+                { id: 'event-resepsi-venue', textKey: 'resepsiVenue', colorKey: 'colorResepsiVenue' },
+                { id: 'event-resepsi-address', textKey: 'resepsiAddress', colorKey: 'colorResepsiAddress' },
+                { id: 'event-maps-text', textKey: 'eventMapsText', colorKey: 'colorEventMapsText' },
+                { id: 'gift-description', textKey: 'giftDescription', colorKey: 'colorGiftDescription' },
+                { id: 'gift-bank1-name', textKey: 'bank1Name', colorKey: 'colorBank1Name' },
+                { id: 'gift-bank1-number', textKey: 'bank1Number', colorKey: 'colorBank1Number' },
+                { id: 'gift-bank1-holder', textKey: 'bank1Holder', colorKey: 'colorBank1Holder' },
+                { id: 'gift-bank2-name', textKey: 'bank2Name', colorKey: 'colorBank2Name' },
+                { id: 'gift-bank2-number', textKey: 'bank2Number', colorKey: 'colorBank2Number' },
+                { id: 'gift-bank2-holder', textKey: 'bank2Holder', colorKey: 'colorBank2Holder' },
                 { id: 'closing-salam', textKey: 'closingSalam', colorKey: 'colorClosingSalam' },
                 { id: 'closing-description', textKey: 'closingDescription', colorKey: 'colorClosingDescription' },
                 { id: 'heading-rsvp', textKey: 'rsvpTitle', colorKey: 'colorRsvpTitle' },
-                { id: 'rsvp-description', textKey: 'rsvpDescription' },
-                { id: 'btn-rsvp', textKey: 'rsvpBtnText' }
+                { id: 'rsvp-description', textKey: 'rsvpDescription', colorKey: 'colorRsvpDescription' },
+                { id: 'btn-rsvp', textKey: 'rsvpBtnText', colorKey: 'colorRsvpBtnText' }
             ];
             subTextMap.forEach(item => {
                 const el = document.getElementById(item.id);

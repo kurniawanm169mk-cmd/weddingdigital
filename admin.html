@@ -199,24 +199,39 @@
                         <div class="p-4 space-y-3 border-t">
                             <div>
                                 <label class="block text-xs font-medium mb-1">Label Atas ("The Wedding Of")</label>
-                                <input type="text" id="config-coverLabelWedding" class="w-full rounded-lg border-gray-300 text-sm" placeholder="The Wedding Of">
+                                <div class="flex gap-2 items-center">
+                                    <input type="text" id="config-coverLabelWedding" class="w-full rounded-lg border-gray-300 text-sm" placeholder="The Wedding Of">
+                                    <input type="color" id="config-colorCoverLabelWedding" class="h-8 w-10 rounded cursor-pointer shrink-0" value="#43493e">
+                                </div>
                             </div>
                             <div>
                                 <label class="block text-xs font-medium mb-1">Prefix Tamu ("Kpd Bpk/Ibu/Saudara/i")</label>
-                                <input type="text" id="config-coverGuestPrefix" class="w-full rounded-lg border-gray-300 text-sm" placeholder="Kpd Bpk/Ibu/Saudara/i">
+                                <div class="flex gap-2 items-center">
+                                    <input type="text" id="config-coverGuestPrefix" class="w-full rounded-lg border-gray-300 text-sm" placeholder="Kpd Bpk/Ibu/Saudara/i">
+                                    <input type="color" id="config-colorCoverGuestPrefix" class="h-8 w-10 rounded cursor-pointer shrink-0" value="#43493e">
+                                </div>
                             </div>
                             <div>
                                 <label class="block text-xs font-medium mb-1">Teks Undangan</label>
-                                <textarea id="config-coverInvitationText" class="w-full rounded-lg border-gray-300 text-sm h-16" placeholder="Tanpa Mengurangi Rasa Hormat..."></textarea>
+                                <div class="flex gap-2 items-start">
+                                    <textarea id="config-coverInvitationText" class="w-full rounded-lg border-gray-300 text-sm h-16" placeholder="Tanpa Mengurangi Rasa Hormat..."></textarea>
+                                    <input type="color" id="config-colorCoverInvitationText" class="h-8 w-10 rounded cursor-pointer shrink-0 mt-1" value="#43493e">
+                                </div>
                             </div>
                             <div class="grid grid-cols-2 gap-3">
                                 <div>
                                     <label class="block text-xs font-medium mb-1">Teks Tombol</label>
-                                    <input type="text" id="config-coverBtnText" class="w-full rounded-lg border-gray-300 text-sm" placeholder="Buka Undangan">
+                                    <div class="flex gap-1 items-center">
+                                        <input type="text" id="config-coverBtnText" class="w-full rounded-lg border-gray-300 text-sm" placeholder="Buka Undangan">
+                                        <input type="color" id="config-colorCoverBtnText" class="h-8 w-8 rounded cursor-pointer shrink-0" value="#43493e">
+                                    </div>
                                 </div>
                                 <div>
                                     <label class="block text-xs font-medium mb-1">Disclaimer</label>
-                                    <input type="text" id="config-coverDisclaimer" class="w-full rounded-lg border-gray-300 text-sm" placeholder="Mohon maaf apabila...">
+                                    <div class="flex gap-1 items-center">
+                                        <input type="text" id="config-coverDisclaimer" class="w-full rounded-lg border-gray-300 text-sm" placeholder="Mohon maaf apabila...">
+                                        <input type="color" id="config-colorCoverDisclaimer" class="h-8 w-8 rounded cursor-pointer shrink-0" value="#43493e">
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -230,11 +245,17 @@
                         <div class="p-4 space-y-3 border-t">
                             <div>
                                 <label class="block text-xs font-medium mb-1">Sub-judul Atas ("Kami Yang Berbahagia")</label>
-                                <input type="text" id="config-heroSubtitle" class="w-full rounded-lg border-gray-300 text-sm" placeholder="Kami Yang Berbahagia">
+                                <div class="flex gap-2 items-center">
+                                    <input type="text" id="config-heroSubtitle" class="w-full rounded-lg border-gray-300 text-sm" placeholder="Kami Yang Berbahagia">
+                                    <input type="color" id="config-colorHeroSubtitle" class="h-8 w-10 rounded cursor-pointer shrink-0" value="#43493e">
+                                </div>
                             </div>
                             <div>
                                 <label class="block text-xs font-medium mb-1">Teks Penutup Hero</label>
-                                <input type="text" id="config-heroClosingText" class="w-full rounded-lg border-gray-300 text-sm" placeholder="Atas kehadiran dan doa restunya...">
+                                <div class="flex gap-2 items-center">
+                                    <input type="text" id="config-heroClosingText" class="w-full rounded-lg border-gray-300 text-sm" placeholder="Atas kehadiran dan doa restunya...">
+                                    <input type="color" id="config-colorHeroClosingText" class="h-8 w-10 rounded cursor-pointer shrink-0" value="#43493e">
+                                </div>
                             </div>
                         </div>
                     </details>
@@ -293,7 +314,10 @@
                             </div>
                             <div>
                                 <label class="block text-xs font-medium mb-1">Teks Tombol Maps</label>
-                                <input type="text" id="config-eventMapsText" class="w-full rounded-lg border-gray-300 text-sm" placeholder="BUKA GOOGLE MAPS">
+                                <div class="flex gap-2 items-center">
+                                    <input type="text" id="config-eventMapsText" class="w-full rounded-lg border-gray-300 text-sm" placeholder="BUKA GOOGLE MAPS">
+                                    <input type="color" id="config-colorEventMapsText" class="h-8 w-10 rounded cursor-pointer shrink-0" value="#ffffff">
+                                </div>
                             </div>
                         </div>
                     </details>
@@ -306,7 +330,40 @@
                         <div class="p-4 space-y-3 border-t">
                             <div>
                                 <label class="block text-xs font-medium mb-1">Deskripsi</label>
-                                <textarea id="config-giftDescription" class="w-full rounded-lg border-gray-300 text-sm h-16" placeholder="Doa restu Anda merupakan karunia..."></textarea>
+                                <div class="flex gap-2 items-start">
+                                    <textarea id="config-giftDescription" class="w-full rounded-lg border-gray-300 text-sm h-16" placeholder="Doa restu Anda merupakan karunia..."></textarea>
+                                    <input type="color" id="config-colorGiftDescription" class="h-8 w-10 rounded cursor-pointer shrink-0 mt-1" value="#43493e">
+                                </div>
+                            </div>
+                        </div>
+                    </details>
+
+                    <!-- RSVP SECTION -->
+                    <details class="bg-gray-50 rounded-lg border border-gray-200 overflow-hidden">
+                        <summary class="px-4 py-3 font-bold text-sm text-green-800 cursor-pointer hover:bg-gray-100 flex items-center gap-2">
+                            <span class="material-symbols-outlined text-[18px]">how_to_reg</span> Halaman RSVP & Wishes
+                        </summary>
+                        <div class="p-4 space-y-3 border-t">
+                            <div>
+                                <label class="block text-xs font-medium mb-1">Judul RSVP</label>
+                                <div class="flex gap-2 items-center">
+                                    <input type="text" id="config-rsvpTitle" class="w-full rounded-lg border-gray-300 text-sm" placeholder="RSVP & WISHES">
+                                    <input type="color" id="config-colorRsvpTitle" class="h-8 w-10 rounded cursor-pointer shrink-0" value="#9d8b88">
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium mb-1">Deskripsi</label>
+                                <div class="flex gap-2 items-start">
+                                    <textarea id="config-rsvpDescription" class="w-full rounded-lg border-gray-300 text-sm h-16" placeholder="Kehadiran Anda..."></textarea>
+                                    <input type="color" id="config-colorRsvpDescription" class="h-8 w-10 rounded cursor-pointer shrink-0 mt-1" value="#43493e">
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium mb-1">Teks Tombol Kirim</label>
+                                <div class="flex gap-2 items-center">
+                                    <input type="text" id="config-rsvpBtnText" class="w-full rounded-lg border-gray-300 text-sm" placeholder="KIRIM VIA WHATSAPP">
+                                    <input type="color" id="config-colorRsvpBtnText" class="h-8 w-10 rounded cursor-pointer shrink-0" value="#ffffff">
+                                </div>
                             </div>
                         </div>
                     </details>
@@ -482,19 +539,31 @@
                             <div class="space-y-3">
                                 <div>
                                     <label class="block text-sm font-medium mb-1">Hari & Tanggal</label>
-                                    <input type="text" id="config-akadDate" class="w-full rounded-lg border-gray-300 text-sm" placeholder="Minggu, 24 Desember 2023">
+                                    <div class="flex gap-2 items-center">
+                                        <input type="text" id="config-akadDate" class="w-full rounded-lg border-gray-300 text-sm" placeholder="Minggu, 24 Desember 2023">
+                                        <input type="color" id="config-colorAkadDate" class="h-8 w-10 rounded cursor-pointer shrink-0" value="#43493e">
+                                    </div>
                                 </div>
                                 <div>
                                     <label class="block text-sm font-medium mb-1">Waktu</label>
-                                    <input type="text" id="config-akadTime" class="w-full rounded-lg border-gray-300 text-sm" placeholder="08:00 WIB - Selesai">
+                                    <div class="flex gap-2 items-center">
+                                        <input type="text" id="config-akadTime" class="w-full rounded-lg border-gray-300 text-sm" placeholder="08:00 WIB - Selesai">
+                                        <input type="color" id="config-colorAkadTime" class="h-8 w-10 rounded cursor-pointer shrink-0" value="#43493e">
+                                    </div>
                                 </div>
                                 <div>
                                     <label class="block text-sm font-medium mb-1">Nama Tempat</label>
-                                    <input type="text" id="config-akadVenue" class="w-full rounded-lg border-gray-300 text-sm" placeholder="Masjid Al-Akbar">
+                                    <div class="flex gap-2 items-center">
+                                        <input type="text" id="config-akadVenue" class="w-full rounded-lg border-gray-300 text-sm" placeholder="Masjid Al-Akbar">
+                                        <input type="color" id="config-colorAkadVenue" class="h-8 w-10 rounded cursor-pointer shrink-0" value="#4a3b52">
+                                    </div>
                                 </div>
                                 <div>
                                     <label class="block text-sm font-medium mb-1">Alamat Lengkap</label>
-                                    <textarea id="config-akadAddress" class="w-full rounded-lg border-gray-300 text-sm h-16"></textarea>
+                                    <div class="flex gap-2 items-start">
+                                        <textarea id="config-akadAddress" class="w-full rounded-lg border-gray-300 text-sm h-16"></textarea>
+                                        <input type="color" id="config-colorAkadAddress" class="h-8 w-10 rounded cursor-pointer shrink-0 mt-1" value="#43493e">
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -503,19 +572,31 @@
                             <div class="space-y-3">
                                 <div>
                                     <label class="block text-sm font-medium mb-1">Hari & Tanggal</label>
-                                    <input type="text" id="config-resepsiDate" class="w-full rounded-lg border-gray-300 text-sm" placeholder="Minggu, 24 Desember 2023">
+                                    <div class="flex gap-2 items-center">
+                                        <input type="text" id="config-resepsiDate" class="w-full rounded-lg border-gray-300 text-sm" placeholder="Minggu, 24 Desember 2023">
+                                        <input type="color" id="config-colorResepsiDate" class="h-8 w-10 rounded cursor-pointer shrink-0" value="#43493e">
+                                    </div>
                                 </div>
                                 <div>
                                     <label class="block text-sm font-medium mb-1">Waktu</label>
-                                    <input type="text" id="config-resepsiTime" class="w-full rounded-lg border-gray-300 text-sm" placeholder="11:00 WIB - Selesai">
+                                    <div class="flex gap-2 items-center">
+                                        <input type="text" id="config-resepsiTime" class="w-full rounded-lg border-gray-300 text-sm" placeholder="11:00 WIB - Selesai">
+                                        <input type="color" id="config-colorResepsiTime" class="h-8 w-10 rounded cursor-pointer shrink-0" value="#43493e">
+                                    </div>
                                 </div>
                                 <div>
                                     <label class="block text-sm font-medium mb-1">Nama Tempat</label>
-                                    <input type="text" id="config-resepsiVenue" class="w-full rounded-lg border-gray-300 text-sm" placeholder="Grand Ballroom Hotel">
+                                    <div class="flex gap-2 items-center">
+                                        <input type="text" id="config-resepsiVenue" class="w-full rounded-lg border-gray-300 text-sm" placeholder="Grand Ballroom Hotel">
+                                        <input type="color" id="config-colorResepsiVenue" class="h-8 w-10 rounded cursor-pointer shrink-0" value="#4a3b52">
+                                    </div>
                                 </div>
                                 <div>
                                     <label class="block text-sm font-medium mb-1">Alamat Lengkap</label>
-                                    <textarea id="config-resepsiAddress" class="w-full rounded-lg border-gray-300 text-sm h-16"></textarea>
+                                    <div class="flex gap-2 items-start">
+                                        <textarea id="config-resepsiAddress" class="w-full rounded-lg border-gray-300 text-sm h-16"></textarea>
+                                        <input type="color" id="config-colorResepsiAddress" class="h-8 w-10 rounded cursor-pointer shrink-0 mt-1" value="#43493e">
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -546,15 +627,24 @@
                         <div class="space-y-3">
                             <div>
                                 <label class="block text-sm font-medium mb-1">Nama Bank / E-Wallet</label>
-                                <input type="text" id="config-bank1Name" class="w-full rounded-lg border-gray-300 text-sm" placeholder="BCA">
+                                <div class="flex gap-2 items-center">
+                                    <input type="text" id="config-bank1Name" class="w-full rounded-lg border-gray-300 text-sm" placeholder="BCA">
+                                    <input type="color" id="config-colorBank1Name" class="h-8 w-10 rounded cursor-pointer shrink-0" value="#4a3b52">
+                                </div>
                             </div>
                             <div>
                                 <label class="block text-sm font-medium mb-1">Nomor Rekening</label>
-                                <input type="text" id="config-bank1Number" class="w-full rounded-lg border-gray-300 text-sm">
+                                <div class="flex gap-2 items-center">
+                                    <input type="text" id="config-bank1Number" class="w-full rounded-lg border-gray-300 text-sm">
+                                    <input type="color" id="config-colorBank1Number" class="h-8 w-10 rounded cursor-pointer shrink-0" value="#1c1b1f">
+                                </div>
                             </div>
                             <div>
                                 <label class="block text-sm font-medium mb-1">Atas Nama</label>
-                                <input type="text" id="config-bank1Holder" class="w-full rounded-lg border-gray-300 text-sm">
+                                <div class="flex gap-2 items-center">
+                                    <input type="text" id="config-bank1Holder" class="w-full rounded-lg border-gray-300 text-sm">
+                                    <input type="color" id="config-colorBank1Holder" class="h-8 w-10 rounded cursor-pointer shrink-0" value="#43493e">
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -563,15 +653,24 @@
                         <div class="space-y-3">
                             <div>
                                 <label class="block text-sm font-medium mb-1">Nama Bank / E-Wallet</label>
-                                <input type="text" id="config-bank2Name" class="w-full rounded-lg border-gray-300 text-sm" placeholder="MANDIRI">
+                                <div class="flex gap-2 items-center">
+                                    <input type="text" id="config-bank2Name" class="w-full rounded-lg border-gray-300 text-sm" placeholder="MANDIRI">
+                                    <input type="color" id="config-colorBank2Name" class="h-8 w-10 rounded cursor-pointer shrink-0" value="#4a3b52">
+                                </div>
                             </div>
                             <div>
                                 <label class="block text-sm font-medium mb-1">Nomor Rekening</label>
-                                <input type="text" id="config-bank2Number" class="w-full rounded-lg border-gray-300 text-sm">
+                                <div class="flex gap-2 items-center">
+                                    <input type="text" id="config-bank2Number" class="w-full rounded-lg border-gray-300 text-sm">
+                                    <input type="color" id="config-colorBank2Number" class="h-8 w-10 rounded cursor-pointer shrink-0" value="#1c1b1f">
+                                </div>
                             </div>
                             <div>
                                 <label class="block text-sm font-medium mb-1">Atas Nama</label>
-                                <input type="text" id="config-bank2Holder" class="w-full rounded-lg border-gray-300 text-sm">
+                                <div class="flex gap-2 items-center">
+                                    <input type="text" id="config-bank2Holder" class="w-full rounded-lg border-gray-300 text-sm">
+                                    <input type="color" id="config-colorBank2Holder" class="h-8 w-10 rounded cursor-pointer shrink-0" value="#43493e">
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -958,27 +1057,29 @@ Wassalamu'alaikum Wr. Wb.
             colorClosingNames: "#4a3b52",
 
             // Sub-texts per section
-            coverLabelWedding: "The Wedding Of",
-            coverGuestPrefix: "Kpd Bpk/Ibu/Saudara/i",
-            coverInvitationText: "Tanpa Mengurangi Rasa Hormat, Kami Mengundang Anda Untuk Berhadir Di Acara Pernikahan Kami.",
-            coverBtnText: "Buka Undangan",
-            coverDisclaimer: "Mohon maaf apabila ada kesalahan penulisan nama, gelar dan alamat.",
-            heroSubtitle: "Kami Yang Berbahagia",
-            heroClosingText: "Atas kehadiran dan doa restunya kami ucapkan terima kasih",
+            coverLabelWedding: "The Wedding Of", colorCoverLabelWedding: "#43493e",
+            coverGuestPrefix: "Kpd Bpk/Ibu/Saudara/i", colorCoverGuestPrefix: "#43493e",
+            coverInvitationText: "Tanpa Mengurangi Rasa Hormat, Kami Mengundang Anda Untuk Berhadir Di Acara Pernikahan Kami.", colorCoverInvitationText: "#43493e",
+            coverBtnText: "Buka Undangan", colorCoverBtnText: "#ffffff",
+            coverDisclaimer: "Mohon maaf apabila ada kesalahan penulisan nama, gelar dan alamat.", colorCoverDisclaimer: "#43493e",
+            heroSubtitle: "Kami Yang Berbahagia", colorHeroSubtitle: "#43493e",
+            heroClosingText: "Atas kehadiran dan doa restunya kami ucapkan terima kasih", colorHeroClosingText: "#43493e",
             ayatArabic: "وَمِنْ ءَايَٰتِهِۦٓ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَٰجًا لِّتَسْكُنُوٓا۟ إِلَيْهَا وَجَعَلَ بَيْنَكُم مَّوَدَّةً وَرَحْمَةً ۚ إِنَّ فِى ذَٰلِكَ لَءَايَٰتٍ لِّقَوْمٍ يَتَفَكَّرُونَ",
             ayatTranslation: '"Dan di antara tanda-tanda kekuasaan-Nya ialah Dia menciptakan untukmu istri-istri dari jenismu sendiri, supaya kamu cenderung dan merasa tenteram kepadanya, dan dijadikan-Nya diantaramu rasa kasih dan sayang."',
             ayatReference: "(QS. Ar-Rum: 21)",
             colorAyatArabic: "", colorAyatTranslation: "", colorAyatReference: "",
             eventAkadTitle: "Akad Nikah", eventResepsiTitle: "Resepsi",
-            eventMapsText: "BUKA GOOGLE MAPS",
+            eventMapsText: "BUKA GOOGLE MAPS", colorEventMapsText: "#ffffff",
             colorEventAkadTitle: "", colorEventResepsiTitle: "",
-            giftDescription: "Doa restu Anda merupakan karunia yang sangat berarti. Jika Anda bermaksud memberikan tanda kasih, dapat melalui:",
+            colorAkadDate: "#43493e", colorAkadTime: "#43493e", colorAkadVenue: "#4a3b52", colorAkadAddress: "#43493e",
+            colorResepsiDate: "#43493e", colorResepsiTime: "#43493e", colorResepsiVenue: "#4a3b52", colorResepsiAddress: "#43493e",
+            giftDescription: "Doa restu Anda merupakan karunia yang sangat berarti. Jika Anda bermaksud memberikan tanda kasih, dapat melalui:", colorGiftDescription: "#43493e",
             closingSalam: "Wassalamu'alaikum Warahmatullahi Wabarakatuh",
             closingDescription: "Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir untuk memberikan doa restu.",
             colorClosingSalam: "", colorClosingDescription: "",
             rsvpTitle: "RSVP & WISHES", colorRsvpTitle: "#9d8b88",
-            rsvpDescription: "Kehadiran Anda merupakan kehormatan bagi kami. Mohon konfirmasi kehadiran Anda melalui form di bawah ini.",
-            rsvpBtnText: "KIRIM VIA WHATSAPP",
+            rsvpDescription: "Kehadiran Anda merupakan kehormatan bagi kami. Mohon konfirmasi kehadiran Anda melalui form di bawah ini.", colorRsvpDescription: "#43493e",
+            rsvpBtnText: "KIRIM VIA WHATSAPP", colorRsvpBtnText: "#ffffff",
             rsvpPhone: "6281234567890",
 
             groomName: "Andy",
