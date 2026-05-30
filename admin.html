@@ -699,6 +699,72 @@ Wassalamu'alaikum Wr. Wb.
         <span id="toast-msg">Tersimpan!</span>
     </div>
 
+    <!-- Modal Tipografi -->
+    <div id="typo-modal" class="fixed inset-0 bg-black/50 z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-xl shadow-xl w-full max-w-md overflow-hidden flex flex-col">
+            <div class="px-4 py-3 border-b flex justify-between items-center bg-gray-50">
+                <h3 class="font-bold text-gray-800 text-sm" id="typo-modal-title">Pengaturan Teks</h3>
+                <button onclick="closeTypoModal()" class="text-gray-500 hover:text-red-500"><span class="material-symbols-outlined">close</span></button>
+            </div>
+            <div class="p-4 space-y-4">
+                <input type="hidden" id="typo-target-key">
+                
+                <div>
+                    <label class="block text-xs font-semibold mb-1">Ukuran Teks (rem)</label>
+                    <div class="flex items-center gap-3">
+                        <input type="range" id="typo-size" min="0.5" max="6" step="0.1" class="w-full" oninput="document.getElementById('typo-size-val').innerText = this.value + 'rem'">
+                        <span id="typo-size-val" class="text-xs font-mono w-12 text-right">1rem</span>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-semibold mb-1">Jenis Font</label>
+                    <select id="typo-font" class="w-full rounded border-gray-300 text-sm">
+                        <option value="">(Default Tema)</option>
+                        <option value="'Playfair Display', serif">Playfair Display (Serif)</option>
+                        <option value="'Montserrat', sans-serif">Montserrat (Sans)</option>
+                        <option value="'Great Vibes', cursive">Great Vibes (Latin)</option>
+                    </select>
+                </div>
+
+                <div class="flex gap-4">
+                    <div class="flex-1">
+                        <label class="block text-xs font-semibold mb-1">Ketebalan</label>
+                        <label class="flex items-center gap-2 text-sm cursor-pointer">
+                            <input type="checkbox" id="typo-bold" class="rounded text-green-600"> Bold
+                        </label>
+                    </div>
+                    <div class="flex-1">
+                        <label class="block text-xs font-semibold mb-1">Gaya</label>
+                        <label class="flex items-center gap-2 text-sm cursor-pointer">
+                            <input type="checkbox" id="typo-italic" class="rounded text-green-600"> Italic
+                        </label>
+                    </div>
+                </div>
+                
+                <div>
+                    <label class="block text-xs font-semibold mb-1">Kerapatan Huruf (em)</label>
+                    <div class="flex items-center gap-3">
+                        <input type="range" id="typo-spacing" min="-0.1" max="0.5" step="0.01" class="w-full" oninput="document.getElementById('typo-spacing-val').innerText = this.value + 'em'">
+                        <span id="typo-spacing-val" class="text-xs font-mono w-12 text-right">0em</span>
+                    </div>
+                </div>
+                
+                <div>
+                    <label class="block text-xs font-semibold mb-1">Warna Teks Override</label>
+                    <div class="flex items-center gap-2">
+                        <input type="color" id="typo-color" class="h-8 w-12 rounded cursor-pointer">
+                        <button onclick="document.getElementById('typo-color').value='#000000'" class="text-xs border px-2 py-1 rounded hover:bg-gray-100">Reset Hitam</button>
+                    </div>
+                </div>
+            </div>
+            <div class="px-4 py-3 border-t bg-gray-50 flex justify-end gap-2">
+                <button onclick="closeTypoModal()" class="px-4 py-2 rounded text-sm text-gray-600 hover:bg-gray-200">Batal</button>
+                <button onclick="saveTypoModal()" class="px-4 py-2 rounded text-sm bg-green-600 text-white hover:bg-green-700">Terapkan</button>
+            </div>
+        </div>
+    </div>
+
     <!-- Scripts -->
     <script>
         // Section Definition for Backgrounds
@@ -899,7 +965,12 @@ Wassalamu'alaikum Wr. Wb.
                 .from('wedding-media')
                 .upload(fileName, file, { cacheControl: '3600', upsert: false });
                 
-            if (error) throw error;
+            if (error) {
+                if (error.message && error.message.includes('Bucket not found')) {
+                    alert("ERROR SUPABASE: Bucket 'wedding-media' belum dibuat!\n\nSilakan buka Dashboard Supabase Anda, masuk ke menu Storage, klik 'New Bucket', dan beri nama persis: wedding-media (centang Public bucket).");
+                }
+                throw error;
+            }
             
             const { data: publicUrlData } = supabaseClient.storage
                 .from('wedding-media')
@@ -1016,10 +1087,38 @@ Wassalamu'alaikum Wr. Wb.
             }
         }
 
+        let activeTypoKey = null;
+
         function loadData() {
             const saved = JSON.parse(localStorage.getItem('wedding_config')) || {};
             const config = { ...DEFAULT_CONFIG, ...saved };
             
+            // Inject typography gear icons
+            if(!window.typoInjected) {
+                document.querySelectorAll('#tab-teks input[type="text"], #tab-teks textarea, #config-groomName, #config-brideName').forEach(input => {
+                    if(input.id.startsWith('config-')) {
+                        const key = input.id.replace('config-', '');
+                        const wrapper = document.createElement('div');
+                        wrapper.className = 'relative flex items-center w-full';
+                        input.parentNode.insertBefore(wrapper, input);
+                        wrapper.appendChild(input);
+                        
+                        const labelEl = input.closest('div').querySelector('label');
+                        const title = labelEl ? labelEl.innerText : 'Teks';
+
+                        const btn = document.createElement('button');
+                        btn.type = 'button';
+                        btn.className = 'absolute right-2 text-gray-400 hover:text-green-600 transition-colors p-1 flex items-center justify-center';
+                        btn.innerHTML = '<span class="material-symbols-outlined text-[18px]">settings</span>';
+                        btn.onclick = () => openTypoModal(key, title);
+                        wrapper.appendChild(btn);
+                        input.classList.add('pr-8');
+                    }
+                });
+                
+                window.typoInjected = true;
+            }
+
             Object.keys(config).forEach(key => {
                 const el = document.getElementById(`config-${key}`);
                 if (el) {
@@ -1054,7 +1153,7 @@ Wassalamu'alaikum Wr. Wb.
         }
 
         function saveAll() {
-            const config = {};
+            const config = JSON.parse(localStorage.getItem('wedding_config')) || {};
             Object.keys(DEFAULT_CONFIG).forEach(key => {
                 const el = document.getElementById(`config-${key}`);
                 if (el) {
@@ -1158,6 +1257,48 @@ Wassalamu'alaikum Wr. Wb.
                 `;
                 tbody.appendChild(tr);
             });
+        }
+
+        function openTypoModal(key, title) {
+            activeTypoKey = key;
+            document.getElementById('typo-modal-title').innerText = 'Format: ' + title;
+            
+            const config = JSON.parse(localStorage.getItem('wedding_config')) || {};
+            const typo = config['typo_' + key] || { size: '1', font: '', bold: false, italic: false, spacing: '0', color: '#000000' };
+            
+            document.getElementById('typo-size').value = typo.size || 1;
+            document.getElementById('typo-size-val').innerText = (typo.size || 1) + 'rem';
+            document.getElementById('typo-font').value = typo.font || '';
+            document.getElementById('typo-bold').checked = !!typo.bold;
+            document.getElementById('typo-italic').checked = !!typo.italic;
+            document.getElementById('typo-spacing').value = typo.spacing || 0;
+            document.getElementById('typo-spacing-val').innerText = (typo.spacing || 0) + 'em';
+            document.getElementById('typo-color').value = typo.color || '#000000';
+            
+            document.getElementById('typo-modal').classList.remove('hidden');
+        }
+
+        function closeTypoModal() {
+            document.getElementById('typo-modal').classList.add('hidden');
+        }
+
+        function saveTypoModal() {
+            const config = JSON.parse(localStorage.getItem('wedding_config')) || {};
+            config['typo_' + activeTypoKey] = {
+                size: document.getElementById('typo-size').value,
+                font: document.getElementById('typo-font').value,
+                bold: document.getElementById('typo-bold').checked,
+                italic: document.getElementById('typo-italic').checked,
+                spacing: document.getElementById('typo-spacing').value,
+                color: document.getElementById('typo-color').value
+            };
+            try {
+                localStorage.setItem('wedding_config', JSON.stringify(config));
+                closeTypoModal();
+                showToast("Pengaturan teks disimpan!");
+            } catch(e) {
+                alert("Gagal menyimpan!");
+            }
         }
 
         loadData();
