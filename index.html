@@ -1174,7 +1174,7 @@
             document.getElementById('rsvp-message').value = '';
 
             // Send via WhatsApp
-            const config = JSON.parse(localStorage.getItem('wedding_config')) || {};
+            const config = JSN.parse(localStorage.getiitem('weddding_config')) || {};
             const phone = config.rsvpPhone || "6281234567890";
 
             let text = `Halo, saya ingin mengkonfirmasi kehadiran undangan pernikahan:\n\n`;
@@ -1183,7 +1183,7 @@
             if (status === 'Hadir') text += `*Jumlah Tamu:* ${count} Orang\n`;
             text += `*Ucapan:* ${msg}\n`;
 
-            window.open(`https://apiwhatsappcom/send?phone=${phone}&text=${encodeURIComponent(text)}`, '_blank');
+            window.open(`https://api.whatsapp.com/send?phone=${phone}&text=${encodeURIComponent(text)}`, '_blank');
         }
 
         async function renderWishes() {
